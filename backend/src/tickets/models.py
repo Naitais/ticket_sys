@@ -1,6 +1,6 @@
 from django.db import models
 
-class ticket(models.Model):
+class Ticket(models.Model):
     title = models.CharField(max_length=120)
     content = models.TextField()
 
