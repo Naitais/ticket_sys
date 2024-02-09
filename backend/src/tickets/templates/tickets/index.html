@@ -1,0 +1,76 @@
+
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Tickets Sistemas </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style sheet/style.css' %}">
+    
+</head>
+<body>
+    TABLA QUE MUESTRA REGISTROS DE LA BASE
+    {% if regitros %}
+    <table id="tickets">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>fecha_liquidaciones</th>
+                <th>operador_liquidaciones</th>
+                <th>concepto</th>
+                <th>empresa</th>
+                <th>legajo</th>
+                <th>nombre</th>
+                <th>observaciones</th>
+                <th>estado_liquidaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in regitros %}
+                <tr>
+                    <td>{{ ticket.id_registro }}</td>
+                    <td>{{ ticket.fecha_liquidaciones }}</td>
+                    <td>{{ ticket.operador_liquidaciones }}</td>
+                    <td>{{ ticket.concepto }}</td>
+                    <td>{{ ticket.empresa }}</td>
+                    <td>{{ ticket.legajo }}</td>
+                    <td>{{ ticket.nombre }}</td>
+                    <td>{{ ticket.observaciones }}</td>
+                    <td>{{ ticket.estado_liquidaciones }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No tickets are available.</p>
+{% endif %}
+
+<button id="nuevo_ticket_btn">Nuevo Ticket</button>
+<div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <form id="entryForm">
+        {% csrf_token %}
+
+        <input type="number" id="concepto" name="Concepto" placeholder="Concepto">
+        <input type="text" id="empresa" name="Empresa" placeholder="Empresa">
+        <input type="number" id="legajo" name="Legajo" placeholder="Legajo">
+        <input type="text" id="nombre" name="Nombre" placeholder="Nombre">
+        <input type="text" id="observaciones" name="Observaciones" placeholder="Observaciones">
+
+      </form>
+    </div>
+    <div>
+        <button type="submit" id="aceptar_nuevo_ticket_btn">Aceptar</button>
+        <button type="submit"id="cancelar_nuevo_ticket_btn">Cancelar</button>
+    </div>
+  </div>
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'javascript/script.js' %}"></script>
+</body>
+</html>
+
