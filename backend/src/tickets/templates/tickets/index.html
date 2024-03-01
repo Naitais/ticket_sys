@@ -30,17 +30,19 @@
         </thead>
         <tbody>
             {% for ticket in regitros %}
-                <tr>
-                    <td>{{ ticket.id_registro }}</td>
-                    <td>{{ ticket.fecha_liquidaciones }}</td>
-                    <td>{{ ticket.operador_liquidaciones }}</td>
-                    <td>{{ ticket.concepto }}</td>
-                    <td>{{ ticket.empresa }}</td>
-                    <td>{{ ticket.legajo }}</td>
-                    <td>{{ ticket.nombre }}</td>
-                    <td>{{ ticket.observaciones }}</td>
-                    <td>{{ ticket.estado_liquidaciones }}</td>
-                </tr>
+                <div >
+                    <tr class="ticket_row">
+                        <td>{{ ticket.id_registro }}</td>
+                        <td>{{ ticket.fecha_liquidaciones }}</td>
+                        <td>{{ ticket.operador_liquidaciones }}</td>
+                        <td>{{ ticket.concepto }}</td>
+                        <td>{{ ticket.empresa }}</td>
+                        <td>{{ ticket.legajo }}</td>
+                        <td>{{ ticket.nombre }}</td>
+                        <td>{{ ticket.observaciones }}</td>
+                        <td>{{ ticket.estado_liquidaciones }}</td>
+                    </tr>
+                </div>
             {% endfor %}
         </tbody>
     </table>
