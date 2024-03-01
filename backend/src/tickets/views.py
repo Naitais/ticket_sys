@@ -37,3 +37,9 @@ def nuevo_ticket(request):
     nuevo_ticket = Registro(concepto= concepto, empresa = empresa, legajo = legajo, nombre = nombre, observaciones = observaciones)
     nuevo_ticket.save()
     return HttpResponse("FUNCIONO")
+
+def mostrar_registro_por_id(request, pk):
+    registro = get_object_or_404(Registro, pk=pk)
+    
+    # Render the template with the Registro data
+    return render(request, 'registro_detalle.html', {'registro': registro})

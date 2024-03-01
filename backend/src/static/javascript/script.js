@@ -1,5 +1,6 @@
 // obtengo ventana modal del formulario segun id
 var modal = document.getElementById("modal");
+var ticket_informacion = document.getElementById("ticket_informacion");
 
 // obtengo botones segun id
 var nuevo_ticket_btn = document.getElementById("nuevo_ticket_btn");
@@ -10,9 +11,11 @@ var cancelar_nuevo_ticket_btn = document.getElementById("cancelar_nuevo_ticket_b
 var ticket_rows = document.getElementsByClassName("ticket_row");
 
 for (var i = 0; i < ticket_rows.length; i++) {
-    ticket_rows[i].addEventListener("mouseover", function(event) {
+    ticket_rows[i].addEventListener("click", function(event) {
         // afecto al parent del target
         //event.target.parentElement.style.backgroundColor = "tomato";
+        ticket_informacion.style.display = "block";
+        
         
     });
 }
@@ -26,7 +29,7 @@ for (var i = 0; i < ticket_rows.length; i++) {
 }
 
 for (var i = 0; i < ticket_rows.length; i++) {
-    //alert(ticket_rows[i].textContent[1])
+    // busco la columna de estado de ticket y pinto de un color segun corresponda
     var columnText = ticket_rows[i].getElementsByTagName("td")[8].textContent;
     if (columnText == "Pendiente"){
         ticket_rows[i].style.backgroundColor = "orange";
@@ -39,9 +42,7 @@ for (var i = 0; i < ticket_rows.length; i++) {
     if (columnText == "Resuelto"){
         ticket_rows[i].style.backgroundColor = "green";
     }
-    
 }
-
 
 //muestro al hacer click
 nuevo_ticket_btn.onclick = function() {
@@ -52,6 +53,12 @@ nuevo_ticket_btn.onclick = function() {
 cancelar_nuevo_ticket_btn.onclick = function() {
     modal.style.display = "none";
   }
+
+cerrar_ventana_btn.onclick = function() {
+    ticket_informacion.style.display = "none";
+  }
+
+  
 
 aceptar_nuevo_ticket_btn.onclick = function(e) {
     //armo los datos del post request obteniendo la info que cargo en cada id del form que cree en el index de html
