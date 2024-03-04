@@ -121,7 +121,7 @@ function llenarCampoPlaceholderForm(columnas){
 
         // cambio el texto placeholder para tener el del ticket
         // le resto 3 para que coincida con el indice de los campos del form
-        input_form_campo[r-3].placeholder = informacion_ticket
+        input_form_campo[r-3].value = informacion_ticket
     }
 }
 
