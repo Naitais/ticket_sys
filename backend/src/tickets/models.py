@@ -13,7 +13,7 @@ class Registro(models.Model):
     legajo = models.CharField(max_length=50)
     nombre = models.CharField(max_length=100)
     observaciones = models.TextField(default = ' ')
-    estado_liquidaciones = models.CharField(max_length=50, default = 'Pendiente')
+    estado_liquidaciones = models.CharField(max_length=50, default = ' ')
     operador_sistemas = models.CharField(max_length=100, default = ' ')
     estado_sistemas = models.CharField(max_length=50, default = ' ')
     devoluciones = models.TextField(default = ' ')

@@ -31,16 +31,16 @@ for (var i = 0; i < ticket_rows.length; i++) {
 
 for (var i = 0; i < ticket_rows.length; i++) {
     // busco la columna de estado de ticket y pinto de un color segun corresponda
-    var columnText = ticket_rows[i].getElementsByTagName("td")[8].textContent;
-    if (columnText == "Pendiente"){
+    var estado_ticket = ticket_rows[i].getElementsByTagName("td")[8].textContent;
+    if (estado_ticket == "Pendiente"){
         ticket_rows[i].style.backgroundColor = "orange";
     }
 
-    if (columnText == "Verificar"){
+    if (estado_ticket == "Verificar"){
         ticket_rows[i].style.backgroundColor = "yellow";
     }
 
-    if (columnText == "Resuelto"){
+    if (estado_ticket == "Resuelto"){
         ticket_rows[i].style.backgroundColor = "green";
     }
 }
