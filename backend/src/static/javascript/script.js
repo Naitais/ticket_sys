@@ -13,6 +13,8 @@ var row_eliminar_btn = document.getElementsByClassName("row_eliminar_btn");
 // ticket row es una coleccion de elementos asi que hay que loopearlos
 var ticket_rows = document.getElementsByClassName("ticket_row");
 
+//obtengo los inputs del form para modificar su placehold text
+var input_form_campo = document.getElementsByClassName("input_form");
 
 for (var i = 0; i < ticket_rows.length; i++) {
     ticket_rows[i].addEventListener("mouseout", function(event) {
@@ -92,8 +94,8 @@ for (var i = 0; i < row_modificar_btn.length; i++) {
         
         //obtengo los nodos de columna de la row seleccionada
         var columnas = event.target.parentNode.parentNode.getElementsByTagName("td")
-        console.log(columnas)
-        llenarColumnas(columnas)
+        //console.log(columnas)
+        llenarCamposPlaceholderForm(columnas)
         
         
     });
@@ -103,13 +105,15 @@ cancelar_cambios_btn.onclick = function() {
     modificar_ticket_pantalla.style.display = "none";
   }
 
-function llenarColumnas(columnas){
-    //quito 2 porque esas dos son columnas con botones
-    for (var r = 0; r < columnas.length - 2; r ++){
-        //obtengo datos de cada columna de la row seleccionada
-        console.log(event.target.parentNode.parentNode.getElementsByTagName("td")[r].textContent)
-        console.log(ticket_informacion.length)
-        console.log(columnas.textContent)
+function llenarCamposPlaceholderForm(columnas){
+    //quito 2 porque esas dos son columnas con botones y empieza de 3 porque los campos anteriores no necesito modificar
+    for (var r = 3; r < columnas.length -2; r ++){
 
+        //obtengo datos de cada columna de la row seleccionada
+        var informacion_ticket = event.target.parentNode.parentNode.getElementsByTagName("td")[r].textContent
+
+        // cambio el texto placeholder para tener el del ticket
+        // le resto 3 para que coincida con el indice de los campos del form
+        input_form_campo[r-3].placeholder = informacion_ticket
     }
 }
