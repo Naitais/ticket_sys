@@ -18,6 +18,7 @@ var ticket_rows = document.getElementsByClassName("ticket_row");
 //obtengo los inputs del form para modificar su placehold text
 var input_form_campo = document.getElementsByClassName("input_form");
 
+// variable para guardar el id del 
 var ticket_id
 
 for (var i = 0; i < ticket_rows.length; i++) {
@@ -127,11 +128,11 @@ function llenarCampoPlaceholderForm(columnas){
 aceptar_cambios_btn.onclick = function(e) {
     //armo los datos del post request obteniendo la info que cargo en cada id del form que cree en el index de html
     var data = {
-        concepto: $("#concepto").val(),
-        empresa: $("#empresa").val(),
-        legajo: $("#legajo").val(),
-        nombre: $("#nombre").val(),
-        observaciones: $("#observaciones").val(),
+        concepto: $("#concepto_modificar").val(),
+        empresa: $("#empresa_modificar").val(),
+        legajo: $("#legajo_modificar").val(),
+        nombre: $("#nombre_modificar").val(),
+        observaciones: $("#observaciones_modificar").val(),
         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
     };
 
@@ -143,6 +144,7 @@ aceptar_cambios_btn.onclick = function(e) {
         success: function(response) {
             //mensaje de exito
             console.log("Ticket modificado con éxito.", response);
+            
             alert("Ticket modificado con éxito.")
             modificar_ticket_pantalla.style.display = "none";
             location.reload()
@@ -153,6 +155,56 @@ aceptar_cambios_btn.onclick = function(e) {
             console.error("Ocurrio un error al modificar el ticket.", error);
             alert("Ocurrio un error al modificar el ticket.")
             modificar_ticket_pantalla.style.display = "none";
+            
+        }
+    });
+};
+
+
+// funcion para eliminar un ticket
+row_eliminar_btn.onclick = function() {
+}
+
+cancelar_eliminar_ticket_btn.onclick = function() {
+    eliminar_ticket_pantalla.style.display = "none";
+  }
+
+for (var i = 0; i < row_eliminar_btn.length; i++) {
+    row_eliminar_btn[i].addEventListener("click", function(event) {
+    eliminar_ticket_pantalla.style.display = "block";
+      
+    //obtengo los nodos de columna de la row seleccionada
+    var columnas = event.target.parentNode.parentNode.getElementsByTagName("td")
+    //console.log(columnas)
+    llenarCampoPlaceholderForm(columnas)
+    ticket_id = event.target.parentNode.parentNode.getElementsByTagName("td")[0].textContent
+    ticket_id = parseInt(ticket_id)
+  });
+}
+
+aceptar_eliminar_ticket_btn.onclick = function(e) {
+    var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+    // configuro ajax
+    $.ajax({
+        type: 'DELETE',
+        url: '/api/eliminar-ticket/'+ticket_id+'/',
+        headers: {
+            "X-CSRFToken": csrfToken
+        },
+        success: function(response) {
+            //mensaje de exito
+            console.log("Ticket eliminado con éxito.", response);
+            
+            alert("Ticket eliminado con éxito.")
+            eliminar_ticket_pantalla.style.display = "none";
+            location.reload()
+            
+        },
+        error: function(xhr, status, error) {
+            //mensaje de error
+            console.error("Ocurrio un error al modificar el ticket.", error);
+            alert("Ocurrio un error al modificar el ticket.")
+            eliminar_ticket_pantalla.style.display = "none";
             
         }
     });

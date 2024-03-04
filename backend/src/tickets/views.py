@@ -59,4 +59,12 @@ def modificar_registro(request, id_registro):
         return HttpResponse(f"Registro actualizado exitosamente.")
     else:
         return HttpResponse("Este endpoint solo acepta solicitudes POST para actualizar registros.")
+    
+def eliminar_registro(request, id_registro):
+    if request.method == 'DELETE':
+        registro = get_object_or_404(Registro, pk=id_registro)
+        registro.delete()
+        return HttpResponse('Registro eliminado con éxito')
+    else:
+        return HttpResponse('Método no permitido')
 
