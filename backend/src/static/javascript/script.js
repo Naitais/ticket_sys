@@ -111,7 +111,7 @@ cancelar_cambios_btn.onclick = function() {
 
 function llenarCampoPlaceholderForm(columnas){
     ticket_id = event.target.parentNode.parentNode.getElementsByTagName("td")[0].textContent
-    console.log(ticket_id)
+    ticket_id = parseInt(ticket_id)
     //quito 2 porque esas dos son columnas con botones y empieza de 3 porque los campos anteriores no necesito modificar
     for (var r = 3; r < columnas.length -2; r ++){
 
@@ -138,7 +138,7 @@ aceptar_cambios_btn.onclick = function(e) {
     // configuro ajax
     $.ajax({
         type: 'POST',
-        url: '/api/modificar-ticket/'+ticket_id,
+        url: '/api/modificar-ticket/'+ticket_id+'/',
         data: data,
         success: function(response) {
             //mensaje de exito

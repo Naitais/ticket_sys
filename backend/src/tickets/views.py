@@ -13,6 +13,7 @@ from django.template import loader
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from .models import Registro
+from datetime import datetime
 
 #muestro tickets
 class TicketView(ListAPIView):
@@ -38,10 +39,10 @@ def nuevo_ticket(request):
     nuevo_ticket.save()
     return HttpResponse("FUNCIONO")
 
-def modificar_registro(request, registro_id):
+def modificar_registro(request, id_registro):
     if request.method == 'POST':
         # Get the existing registro object
-        registro = get_object_or_404(Registro, pk=registro_id)
+        registro = get_object_or_404(Registro, pk=id_registro)
         
         # Update the fields with the data from the POST request
         registro.concepto = request.POST.get('concepto', registro.concepto)
@@ -49,11 +50,13 @@ def modificar_registro(request, registro_id):
         registro.legajo = request.POST.get('legajo', registro.legajo)
         registro.nombre = request.POST.get('nombre', registro.nombre)
         registro.observaciones = request.POST.get('observaciones', registro.observaciones)
+        registro.fecha_sistemas = datetime.now()
+
         
         # Save the updated registro
         registro.save()
         
-        return HttpResponse("Registro actualizado exitosamente.")
+        return HttpResponse(f"Registro actualizado exitosamente.")
     else:
         return HttpResponse("Este endpoint solo acepta solicitudes POST para actualizar registros.")
 
