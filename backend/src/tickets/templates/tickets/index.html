@@ -40,6 +40,8 @@
                         <td>{{ ticket.nombre }}</td>
                         <td>{{ ticket.observaciones }}</td>
                         <td>{{ ticket.estado_liquidaciones }}</td>
+                        <td class="row_modificar_btn"><button>Modificar</button></td>
+                        <td class="row_eliminar_btn"><button>Eliminar</button></td>
                     </tr>
                 </div>
             {% endfor %}
@@ -70,9 +72,25 @@
     </div>
   </div>
 
-<div id="ticket_informacion">
+<div id="modificar_ticket_pantalla">
     <h3>PRUEBA AAAAAA</h3>
-    <button type="submit"id="cerrar_ventana_btn">Cerrar</button>
+    <form id="ticket_informacion">
+        {% csrf_token %}
+
+        <input type="number" id="concepto" name="Concepto" placeholder="Concepto">
+        <input type="text" id="empresa" name="Empresa" placeholder="Empresa">
+        <input type="number" id="legajo" name="Legajo" placeholder="Legajo">
+        <input type="text" id="nombre" name="Nombre" placeholder="Nombre">
+        <input type="text" id="observaciones" name="Observaciones" placeholder="Observaciones">
+        <input type="text" id="estado_liquidaciones" name="estado_liquidaciones" placeholder="Estado">
+
+      </form>
+
+    <div>
+        <button type="submit"id="aceptar_cambios_btn">Aceptar</button>
+        <button type="submit"id="cancelar_cambios_btn">Cancelar</button>
+    </div>
+    
 </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'javascript/script.js' %}"></script>

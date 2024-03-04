@@ -1,24 +1,18 @@
 // obtengo ventana modal del formulario segun id
 var modal = document.getElementById("modal");
+var modificar_ticket_pantalla = document.getElementById("modificar_ticket_pantalla");
 var ticket_informacion = document.getElementById("ticket_informacion");
 
 // obtengo botones segun id
 var nuevo_ticket_btn = document.getElementById("nuevo_ticket_btn");
 var aceptar_nuevo_ticket_btn = document.getElementById("aceptar_nuevo_ticket_btn");
 var cancelar_nuevo_ticket_btn = document.getElementById("cancelar_nuevo_ticket_btn");
+var row_modificar_btn = document.getElementsByClassName("row_modificar_btn");
+var row_eliminar_btn = document.getElementsByClassName("row_eliminar_btn");
 
-// ticket row es como una coleccion de elementos asi que hay que loopearlos
+// ticket row es una coleccion de elementos asi que hay que loopearlos
 var ticket_rows = document.getElementsByClassName("ticket_row");
 
-for (var i = 0; i < ticket_rows.length; i++) {
-    ticket_rows[i].addEventListener("click", function(event) {
-        // afecto al parent del target
-        //event.target.parentElement.style.backgroundColor = "tomato";
-        ticket_informacion.style.display = "block";
-        
-        
-    });
-}
 
 for (var i = 0; i < ticket_rows.length; i++) {
     ticket_rows[i].addEventListener("mouseout", function(event) {
@@ -54,12 +48,6 @@ cancelar_nuevo_ticket_btn.onclick = function() {
     modal.style.display = "none";
   }
 
-cerrar_ventana_btn.onclick = function() {
-    ticket_informacion.style.display = "none";
-  }
-
-  
-
 aceptar_nuevo_ticket_btn.onclick = function(e) {
     //armo los datos del post request obteniendo la info que cargo en cada id del form que cree en el index de html
     var data = {
@@ -93,3 +81,35 @@ aceptar_nuevo_ticket_btn.onclick = function(e) {
         }
     });
 };
+
+// funcion para modificar un ticket
+row_modificar_btn.onclick = function() {
+  }
+
+for (var i = 0; i < row_modificar_btn.length; i++) {
+    row_modificar_btn[i].addEventListener("click", function(event) {
+        modificar_ticket_pantalla.style.display = "block";
+        
+        //obtengo los nodos de columna de la row seleccionada
+        var columnas = event.target.parentNode.parentNode.getElementsByTagName("td")
+        console.log(columnas)
+        llenarColumnas(columnas)
+        
+        
+    });
+}
+
+cancelar_cambios_btn.onclick = function() {
+    modificar_ticket_pantalla.style.display = "none";
+  }
+
+function llenarColumnas(columnas){
+    //quito 2 porque esas dos son columnas con botones
+    for (var r = 0; r < columnas.length - 2; r ++){
+        //obtengo datos de cada columna de la row seleccionada
+        console.log(event.target.parentNode.parentNode.getElementsByTagName("td")[r].textContent)
+        console.log(ticket_informacion.length)
+        console.log(columnas.textContent)
+
+    }
+}

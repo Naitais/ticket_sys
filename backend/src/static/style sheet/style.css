@@ -9,8 +9,8 @@
     z-index: 1; /* Ensure modal is on top of other content */
 }
 
-#ticket_informacion {
-    
+#modificar_ticket_pantalla {
+
     display: none;
     position: fixed;
     top: 0;
