@@ -9,12 +9,16 @@ var aceptar_nuevo_ticket_btn = document.getElementById("aceptar_nuevo_ticket_btn
 var cancelar_nuevo_ticket_btn = document.getElementById("cancelar_nuevo_ticket_btn");
 var row_modificar_btn = document.getElementsByClassName("row_modificar_btn");
 var row_eliminar_btn = document.getElementsByClassName("row_eliminar_btn");
+//var cancelar_cambios_btn = document.getElementById("cancelar_cambios_btn")
+//var aceptar_cambios_btn = document.getElementById("aceptar_cambios_btn")
 
 // ticket row es una coleccion de elementos asi que hay que loopearlos
 var ticket_rows = document.getElementsByClassName("ticket_row");
 
 //obtengo los inputs del form para modificar su placehold text
 var input_form_campo = document.getElementsByClassName("input_form");
+
+var ticket_id
 
 for (var i = 0; i < ticket_rows.length; i++) {
     ticket_rows[i].addEventListener("mouseout", function(event) {
@@ -95,7 +99,7 @@ for (var i = 0; i < row_modificar_btn.length; i++) {
         //obtengo los nodos de columna de la row seleccionada
         var columnas = event.target.parentNode.parentNode.getElementsByTagName("td")
         //console.log(columnas)
-        llenarCamposPlaceholderForm(columnas)
+        llenarCampoPlaceholderForm(columnas)
         
         
     });
@@ -105,7 +109,9 @@ cancelar_cambios_btn.onclick = function() {
     modificar_ticket_pantalla.style.display = "none";
   }
 
-function llenarCamposPlaceholderForm(columnas){
+function llenarCampoPlaceholderForm(columnas){
+    ticket_id = event.target.parentNode.parentNode.getElementsByTagName("td")[0].textContent
+    console.log(ticket_id)
     //quito 2 porque esas dos son columnas con botones y empieza de 3 porque los campos anteriores no necesito modificar
     for (var r = 3; r < columnas.length -2; r ++){
 
@@ -117,3 +123,37 @@ function llenarCamposPlaceholderForm(columnas){
         input_form_campo[r-3].placeholder = informacion_ticket
     }
 }
+
+aceptar_cambios_btn.onclick = function(e) {
+    //armo los datos del post request obteniendo la info que cargo en cada id del form que cree en el index de html
+    var data = {
+        concepto: $("#concepto").val(),
+        empresa: $("#empresa").val(),
+        legajo: $("#legajo").val(),
+        nombre: $("#nombre").val(),
+        observaciones: $("#observaciones").val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+    };
+
+    // configuro ajax
+    $.ajax({
+        type: 'POST',
+        url: '/api/modificar-ticket/'+ticket_id,
+        data: data,
+        success: function(response) {
+            //mensaje de exito
+            console.log("Ticket modificado con éxito.", response);
+            alert("Ticket modificado con éxito.")
+            modificar_ticket_pantalla.style.display = "none";
+            location.reload()
+            
+        },
+        error: function(xhr, status, error) {
+            //mensaje de error
+            console.error("Ocurrio un error al modificar el ticket.", error);
+            alert("Ocurrio un error al modificar el ticket.")
+            modificar_ticket_pantalla.style.display = "none";
+            
+        }
+    });
+};

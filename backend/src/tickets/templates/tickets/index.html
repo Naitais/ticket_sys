@@ -73,16 +73,15 @@
   </div>
 
 <div id="modificar_ticket_pantalla">
-    <h3>PRUEBA AAAAAA</h3>
+    <h3>MODIFICAR TICKET PANTALLA</h3>
     <form id="ticket_informacion">
         {% csrf_token %}
-
-        <input class="input_form" type="number" id="concepto" name="Concepto" placeholder="Concepto">
-        <input class="input_form" type="text" id="empresa" name="Empresa" placeholder="Empresa">
-        <input class="input_form"  type="number" id="legajo" name="Legajo" placeholder="Legajo">
-        <input class="input_form" type="text" id="nombre" name="Nombre" placeholder="Nombre">
-        <input class="input_form" type="text" id="observaciones" name="Observaciones" placeholder="Observaciones">
-        <input class="input_form" type="text" id="estado_liquidaciones" name="estado_liquidaciones" placeholder="Estado">
+        <input class="input_form" type="number" id="concepto_modificar" name="Concepto" placeholder="Concepto">
+        <input class="input_form" type="text" id="empresa_modificar" name="Empresa" placeholder="Empresa">
+        <input class="input_form"  type="number" id="legajo_modificar" name="Legajo" placeholder="Legajo">
+        <input class="input_form" type="text" id="nombre_modificar" name="Nombre" placeholder="Nombre">
+        <input class="input_form" type="text" id="observaciones_modificar" name="Observaciones" placeholder="Observaciones">
+        <input class="input_form" type="text" id="estado_liquidaciones_modificar" name="estado_liquidaciones" placeholder="Estado">
 
       </form>
 
@@ -92,6 +91,7 @@
     </div>
     
 </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'javascript/script.js' %}"></script>
 </body>

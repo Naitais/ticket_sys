@@ -38,8 +38,22 @@ def nuevo_ticket(request):
     nuevo_ticket.save()
     return HttpResponse("FUNCIONO")
 
-def mostrar_registro_por_id(request, pk):
-    registro = get_object_or_404(Registro, pk=pk)
-    
-    # Render the template with the Registro data
-    return render(request, 'registro_detalle.html', {'registro': registro})
+def modificar_registro(request, registro_id):
+    if request.method == 'POST':
+        # Get the existing registro object
+        registro = get_object_or_404(Registro, pk=registro_id)
+        
+        # Update the fields with the data from the POST request
+        registro.concepto = request.POST.get('concepto', registro.concepto)
+        registro.empresa = request.POST.get('empresa', registro.empresa)
+        registro.legajo = request.POST.get('legajo', registro.legajo)
+        registro.nombre = request.POST.get('nombre', registro.nombre)
+        registro.observaciones = request.POST.get('observaciones', registro.observaciones)
+        
+        # Save the updated registro
+        registro.save()
+        
+        return HttpResponse("Registro actualizado exitosamente.")
+    else:
+        return HttpResponse("Este endpoint solo acepta solicitudes POST para actualizar registros.")
+
