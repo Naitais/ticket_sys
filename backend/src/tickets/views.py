@@ -50,6 +50,7 @@ def modificar_registro(request, id_registro):
         registro.legajo = request.POST.get('legajo', registro.legajo)
         registro.nombre = request.POST.get('nombre', registro.nombre)
         registro.observaciones = request.POST.get('observaciones', registro.observaciones)
+        registro.estado_liquidaciones = request.POST.get('estado_liquidaciones', registro.estado_liquidaciones)
         registro.fecha_sistemas = datetime.now()
 
         

@@ -55,6 +55,7 @@ cancelar_nuevo_ticket_btn.onclick = function() {
     modal.style.display = "none";
   }
 
+
 aceptar_nuevo_ticket_btn.onclick = function(e) {
     //armo los datos del post request obteniendo la info que cargo en cada id del form que cree en el index de html
     var data = {
@@ -66,7 +67,7 @@ aceptar_nuevo_ticket_btn.onclick = function(e) {
         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
     };
 
-    // configuro ajax
+    // ajax nuevo ticket
     $.ajax({
         type: 'POST',
         url: '/api/nuevo-ticket/',
@@ -99,7 +100,6 @@ for (var i = 0; i < row_modificar_btn.length; i++) {
         
         //obtengo los nodos de columna de la row seleccionada
         var columnas = event.target.parentNode.parentNode.getElementsByTagName("td")
-        //console.log(columnas)
         llenarCampoPlaceholderForm(columnas)
         
         
@@ -121,7 +121,7 @@ function llenarCampoPlaceholderForm(columnas){
 
         // cambio el texto placeholder para tener el del ticket
         // le resto 3 para que coincida con el indice de los campos del form
-        input_form_campo[r-3].value = informacion_ticket
+        input_form_campo[r - 3].value = informacion_ticket
     }
 }
 
@@ -133,10 +133,11 @@ aceptar_cambios_btn.onclick = function(e) {
         legajo: $("#legajo_modificar").val(),
         nombre: $("#nombre_modificar").val(),
         observaciones: $("#observaciones_modificar").val(),
+        estado_liquidaciones: $("#estado_liquidaciones_modificar").val(),
         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
     };
 
-    // configuro ajax
+    // ajax modificacion de ticket
     $.ajax({
         type: 'POST',
         url: '/api/modificar-ticket/'+ticket_id+'/',
@@ -184,7 +185,7 @@ for (var i = 0; i < row_eliminar_btn.length; i++) {
 
 aceptar_eliminar_ticket_btn.onclick = function(e) {
     var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
-    // configuro ajax
+    // ajax eliminar ticket
     $.ajax({
         type: 'DELETE',
         url: '/api/eliminar-ticket/'+ticket_id+'/',
