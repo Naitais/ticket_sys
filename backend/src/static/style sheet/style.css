@@ -1,4 +1,4 @@
-#modal {
+.ventana_emergente{
     display: none;
     position: fixed;
     top: 0;
@@ -6,32 +6,17 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    z-index: 1; /* Ensure modal is on top of other content */
+    z-index: 1; /* pongo ventana encima de todo lo demas */
 }
 
-#modificar_ticket_pantalla {
-
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    z-index: 1; /* Ensure modal is on top of other content */
-}
+.contenedor_ventana {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
 
 #ticket_row {
     background-color: rgba(0, 0, 0, 0.5);
-}
-
-#eliminar_ticket_pantalla {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    z-index: 1; /* Ensure modal is on top of other content */
 }

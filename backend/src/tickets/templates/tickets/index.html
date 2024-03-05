@@ -1,4 +1,3 @@
-
 {% load static %}
 
 <!DOCTYPE html>
@@ -52,49 +51,54 @@
 {% endif %}
 
 <button id="nuevo_ticket_btn">Nuevo Ticket</button>
-<div id="modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <form id="entryForm">
+
+<div id="modal" class="ventana_emergente"> 
+    
+    <div class="contenedor_ventana">
+        <h3>CREAR NUEVO TICKET</h3>
+        <form id="entryForm">
         {% csrf_token %}
 
-        <input type="number" id="concepto" name="Concepto" placeholder="Concepto">
-        <input type="text" id="empresa" name="Empresa" placeholder="Empresa">
-        <input type="number" id="legajo" name="Legajo" placeholder="Legajo">
-        <input type="text" id="nombre" name="Nombre" placeholder="Nombre">
-        <input type="text" id="observaciones" name="Observaciones" placeholder="Observaciones">
+            <input type="number" id="concepto" name="Concepto" placeholder="Concepto">
+            <input type="text" id="empresa" name="Empresa" placeholder="Empresa">
+            <input type="number" id="legajo" name="Legajo" placeholder="Legajo">
+            <input type="text" id="nombre" name="Nombre" placeholder="Nombre">
+            <input type="text" id="observaciones" name="Observaciones" placeholder="Observaciones">
 
-      </form>
-    </div>
-    <div>
-        <button type="submit" id="aceptar_nuevo_ticket_btn">Aceptar</button>
-        <button type="submit"id="cancelar_nuevo_ticket_btn">Cancelar</button>
-    </div>
-  </div>
-
-<div id="modificar_ticket_pantalla">
-    <h3>MODIFICAR TICKET PANTALLA</h3>
-    <form id="ticket_informacion">
-        {% csrf_token %}
-        <input class="input_form" type="number" id="concepto_modificar" name="Concepto" placeholder="Concepto">
-        <input class="input_form" type="text" id="empresa_modificar" name="Empresa" placeholder="Empresa">
-        <input class="input_form"  type="number" id="legajo_modificar" name="Legajo" placeholder="Legajo">
-        <input class="input_form" type="text" id="nombre_modificar" name="Nombre" placeholder="Nombre">
-        <input class="input_form" type="text" id="observaciones_modificar" name="Observaciones" placeholder="Observaciones">
-        <input class="input_form" type="text" id="estado_liquidaciones_modificar" name="estado_liquidaciones" placeholder="Estado">
-
-      </form>
-
-    <div>
-        <button type="submit"id="aceptar_cambios_btn">Aceptar</button>
-        <button type="submit"id="cancelar_cambios_btn">Cancelar</button>
+        </form>
+        <div>
+            <button type="submit" id="aceptar_nuevo_ticket_btn">Aceptar</button>
+            <button type="submit"id="cancelar_nuevo_ticket_btn">Cancelar</button>
+        </div>
     </div>
 </div>
 
-<div id="eliminar_ticket_pantalla">
-    <h3>¿DESEA ELIMINAR EL REGISTRO?</h3>
-    <button type="submit"id="aceptar_eliminar_ticket_btn">Aceptar</button>
-    <button type="submit"id="cancelar_eliminar_ticket_btn">Cancelar</button>
+<div id="modificar_ticket_pantalla" class="ventana_emergente">
+    <div class="contenedor_ventana">
+        <h3>MODIFICAR TICKET PANTALLA</h3>
+        <form id="ticket_informacion">
+            {% csrf_token %}
+            <input class="input_form" type="number" id="concepto_modificar" name="Concepto" placeholder="Concepto">
+            <input class="input_form" type="text" id="empresa_modificar" name="Empresa" placeholder="Empresa">
+            <input class="input_form"  type="number" id="legajo_modificar" name="Legajo" placeholder="Legajo">
+            <input class="input_form" type="text" id="nombre_modificar" name="Nombre" placeholder="Nombre">
+            <input class="input_form" type="text" id="observaciones_modificar" name="Observaciones" placeholder="Observaciones">
+            <input class="input_form" type="text" id="estado_liquidaciones_modificar" name="estado_liquidaciones" placeholder="Estado">
+
+        </form>
+        <div>
+            <button type="submit"id="aceptar_cambios_btn">Aceptar</button>
+            <button type="submit"id="cancelar_cambios_btn">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div id="eliminar_ticket_pantalla" class="ventana_emergente">
+    <div class="contenedor_ventana">
+        <h3>¿DESEA ELIMINAR EL REGISTRO?</h3>
+        <button type="submit"id="aceptar_eliminar_ticket_btn">Aceptar</button>
+        <button type="submit"id="cancelar_eliminar_ticket_btn">Cancelar</button>
+    </div>
 </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'javascript/script.js' %}"></script>
