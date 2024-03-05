@@ -10,10 +10,11 @@
     
 </head>
 <body>
-    TABLA QUE MUESTRA REGISTROS DE LA BASE
+    <div id="titulo_principal"><h2>Sistema de Tickets</h2></div>
     {% if regitros %}
     <table id="tickets">
-        <thead>
+        <div>
+            <thead id="cabecera_de_tabla_tickets">
             <tr>
                 <th>ID</th>
                 <th>fecha_liquidaciones</th>
@@ -26,6 +27,8 @@
                 <th>estado_liquidaciones</th>
             </tr>
         </thead>
+        </div>
+        
         <tbody>
             {% for ticket in regitros %}
                 <div >
@@ -64,7 +67,7 @@
             <input type="number" id="legajo" name="Legajo" placeholder="Legajo">
             <input type="text" id="nombre" name="Nombre" placeholder="Nombre">
             <input type="text" id="observaciones" name="Observaciones" placeholder="Observaciones">
-            
+            <button>test</button>
 
         </form>
         <div>
