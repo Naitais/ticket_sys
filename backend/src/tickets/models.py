@@ -19,3 +19,5 @@ class Registro(models.Model):
     devoluciones = models.TextField(default = ' ')
     fecha_sistemas = models.TextField(default = ' ')
 
+
+

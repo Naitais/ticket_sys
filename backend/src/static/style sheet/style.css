@@ -37,3 +37,10 @@ body{
 .titulo_pantalla_emergente{
     text-align: center;
 }
+
+.drop_down_container{
+    display: none;
+    position: relative;
+    
+    background-color: aqua;
+}

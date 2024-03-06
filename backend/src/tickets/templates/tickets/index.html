@@ -5,7 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Tickets Sistemas </title>
+    
+    <div id="nav_var">
+        <title> Tickets Sistemas </title>
+        <button></button>
+        <button></button>
+    </div>
+
     <link rel="stylesheet" type="text/css" href="{% static 'style sheet/style.css' %}">
     
 </head>
@@ -17,14 +23,14 @@
             <thead id="cabecera_de_tabla_tickets">
             <tr>
                 <th>ID</th>
-                <th>fecha_liquidaciones</th>
-                <th>operador_liquidaciones</th>
-                <th>concepto</th>
-                <th>empresa</th>
-                <th>legajo</th>
-                <th>nombre</th>
-                <th>observaciones</th>
-                <th>estado_liquidaciones</th>
+                <th>FECHA</th>
+                <th>USUARIO</th>
+                <th>CONCEPTO</th>
+                <th>EMPRESA</th>
+                <th>LEGAJO</th>
+                <th>NOMBRE AGENTE</th>
+                <th>OBSERVACIONES</th>
+                <th>ESTADO TICKET</th>
             </tr>
         </thead>
         </div>
@@ -67,7 +73,6 @@
             <input type="number" id="legajo" name="Legajo" placeholder="Legajo">
             <input type="text" id="nombre" name="Nombre" placeholder="Nombre">
             <input type="text" id="observaciones" name="Observaciones" placeholder="Observaciones">
-            <button>test</button>
 
         </form>
         <div>
@@ -88,6 +93,18 @@
             <input class="input_form" type="text" id="nombre_modificar" name="Nombre" placeholder="Nombre">
             <input class="input_form" type="text" id="observaciones_modificar" name="Observaciones" placeholder="Observaciones">
             <input class="input_form" type="text" id="estado_liquidaciones_modificar" name="estado_liquidaciones" placeholder="Estado">
+            <span id="dropdown_test_span"> aaa</span>
+            <div class="drop_down_container">
+                <div>
+                    <span>Verificar</span>
+                </div>
+                <div>
+                    <span>Resuelto</span>
+                </div>
+                <div>
+                    <span>Pendiente</span>
+                </div>
+            </div>
 
         </form>
         <div>

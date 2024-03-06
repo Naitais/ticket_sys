@@ -210,3 +210,26 @@ aceptar_eliminar_ticket_btn.onclick = function(e) {
         }
     });
 };
+
+
+
+
+var dropdown_test_span = document.getElementById("dropdown_test_span");
+var drop_down_container = document.getElementsByClassName("drop_down_container")
+
+dropdown_test_span.addEventListener("mouseover", function(event) {
+    // afecto al parent del target
+    //event.target.parentElement.style.backgroundColor = "white";
+    //alert(drop_down_container[0])
+    drop_down_container[0].style.display="block";
+});
+
+drop_down_container[0].addEventListener("mouseover", function(event) {
+    // afecto al parent del target
+    //event.target.parentElement.style.backgroundColor = "white";
+    //alert(drop_down_container[0])
+    //drop_down_container[0].style.display="none";
+});
+
+
+

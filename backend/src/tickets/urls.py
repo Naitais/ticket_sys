@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import index, nuevo_ticket, modificar_registro, eliminar_registro
+from explorer.views import query
 
 urlpatterns = [
     path('tickets/', index, name="index"),
