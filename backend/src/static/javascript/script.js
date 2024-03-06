@@ -96,7 +96,7 @@ row_modificar_btn.onclick = function() {
 
 for (var i = 0; i < row_modificar_btn.length; i++) {
     row_modificar_btn[i].addEventListener("click", function(event) {
-        modificar_ticket_pantalla.style.display = "block";
+        modificar_ticket_pantalla.style.display = "inline-block";
         
         //obtengo los nodos de columna de la row seleccionada
         var columnas = event.target.parentNode.parentNode.getElementsByTagName("td")
@@ -210,9 +210,6 @@ aceptar_eliminar_ticket_btn.onclick = function(e) {
         }
     });
 };
-
-
-
 
 var dropdown_test_span = document.getElementById("dropdown_test_span");
 var drop_down_container = document.getElementsByClassName("drop_down_container")

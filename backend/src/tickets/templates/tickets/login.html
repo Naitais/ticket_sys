@@ -17,8 +17,8 @@
             <tr>
                 <th>ID</th>
                 <th>USUARIO</th>
-                <th>CONCEPTO</th>
-                <th>EMPRESA</th>
+                <th>CONTRASEÑA</th>
+                <th>EMAIL</th>
             </tr>
         </thead>
         </div>
@@ -39,8 +39,26 @@
 {% else %}
     <p>NO HAY TICKETS PARA MOSTRAR.</p>
 {% endif %}
+
+<div id="iniciar_sesion_pantalla">
+    <div class="contenedor_ventana">
+        <h3 class="titulo_pantalla_emergente">INICIAR SESION PANTALLA</h3>
+        <form id="ticket_informacion">
+            {% csrf_token %}
+            <div class="contenedor_columna">
+                <div><input class="input_form" type="text" id="usuario_login" name="Usuario" placeholder="Usuario"></div>
+                <div><input class="input_form" type="text" id="contraseña_login" name="Empresa" placeholder="Contraseña"></div>                
+            </div>
+        </form>
+        <div>
+            <button type="submit"id="iniciar_sesion_btn">Iniciar sesion</button>
+            <button type="submit"id="crear_cuenta_btn">Crear cuenta</button>
+        </div>
+    </div>
+</div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{% static 'javascript/script.js' %}"></script>
+    <script src="{% static 'javascript/login.js' %}"></script>
 </body>
 </html>
 

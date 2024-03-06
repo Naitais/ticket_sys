@@ -12,7 +12,7 @@
     
     <div id="nav_var">
         <div id="titulo_principal"><h2>Sistema de Tickets</h2></div>    
-        <div><button>Cerrar Sesion</button></div>
+        <div><button> Cerrar Sesion </button></div>
         <div><button> Ir a ticketera </button></div>
         <div><button> Ir a histórico de tickets </button></div>
     </div>
@@ -64,14 +64,33 @@
     
     <div class="contenedor_ventana">
         <h3 class="titulo_pantalla_emergente">CREAR NUEVO TICKET</h3>
-        <form id="entryForm">
+        <form id="entryForm" class="contenedor_columna">
         {% csrf_token %}
 
-            <input type="number" id="concepto" name="Concepto" placeholder="Concepto">
-            <input type="text" id="empresa" name="Empresa" placeholder="Empresa">
-            <input type="number" id="legajo" name="Legajo" placeholder="Legajo">
-            <input type="text" id="nombre" name="Nombre" placeholder="Nombre">
-            <input type="text" id="observaciones" name="Observaciones" placeholder="Observaciones">
+            <div class="contenedor_fila">
+                <span>Concepto</span>
+                <input type="number" id="concepto" name="Concepto" placeholder="Concepto">
+            </div>
+
+            <div class="contenedor_fila">
+                <span>Empresa</span>
+                <input type="text" id="empresa" name="Empresa" placeholder="Empresa">
+            </div>
+
+            <div class="contenedor_fila">
+                <span>Legajo</span>
+                <input type="number" id="legajo" name="Legajo" placeholder="Legajo">
+            </div>
+
+            <div class="contenedor_fila">
+                <span>Nombre</span>
+                <input type="text" id="nombre" name="Nombre" placeholder="Nombre">
+            </div>
+
+            <div class="contenedor_fila">
+                <span>Observaciones</span>
+                <input type="text" id="observaciones" name="Observaciones" placeholder="Observaciones">
+            </div>
 
         </form>
         <div>
@@ -84,15 +103,39 @@
 <div id="modificar_ticket_pantalla" class="ventana_emergente">
     <div class="contenedor_ventana">
         <h3 class="titulo_pantalla_emergente">MODIFICAR TICKET PANTALLA</h3>
-        <form id="ticket_informacion">
+        <form id="ticket_informacion" class="contenedor_columna">
             {% csrf_token %}
 
-            <input class="input_form" type="number" id="concepto_modificar" name="Concepto" placeholder="Concepto">
-            <input class="input_form" type="text" id="empresa_modificar" name="Empresa" placeholder="Empresa">
-            <input class="input_form"  type="number" id="legajo_modificar" name="Legajo" placeholder="Legajo">
-            <input class="input_form" type="text" id="nombre_modificar" name="Nombre" placeholder="Nombre">
-            <input class="input_form" type="text" id="observaciones_modificar" name="Observaciones" placeholder="Observaciones">
-            <input class="input_form" type="text" id="estado_liquidaciones_modificar" name="estado_liquidaciones" placeholder="Estado">
+            <div class="contenedor_fila">
+                <span>Concepto</span>
+                <input class="input_form" type="number" id="concepto_modificar" name="Concepto" placeholder="Concepto">
+            </div>
+
+            <div class="contenedor_fila">
+                <span>Empresa</span>
+                <input class="input_form" type="text" id="empresa_modificar" name="Empresa" placeholder="Empresa">
+            </div>
+
+            <div class="contenedor_fila">
+                <span>Legajo</span>
+                <input class="input_form"  type="number" id="legajo_modificar" name="Legajo" placeholder="Legajo">
+            </div>
+
+            <div class="contenedor_fila">
+                <span> Nombre Agente</span>
+                <input class="input_form" type="text" id="nombre_modificar" name="Nombre" placeholder="Nombre">
+            </div>
+
+            <div class="contenedor_fila">
+                <span> Observaciones </span>
+                <input class="input_form" type="text" id="observaciones_modificar" name="Observaciones" placeholder="Observaciones">
+            </div>
+
+            <div class="contenedor_fila">
+                <span> Estado Ticket </span>
+                <input class="input_form" type="text" id="estado_liquidaciones_modificar" name="estado_liquidaciones" placeholder="Estado">
+            </div>
+
             <span id="dropdown_test_span"> aaa</span>
             <div class="drop_down_container">
                 <div>

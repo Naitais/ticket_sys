@@ -15,6 +15,11 @@ from django.shortcuts import get_object_or_404, render
 from .models import Registro
 from datetime import datetime
 
+#for login
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import render, redirect
+
 #muestro tickets
 class TicketView(ListAPIView):
     queryset = Registro.objects.all()
@@ -52,7 +57,6 @@ def modificar_registro(request, id_registro):
         registro.observaciones = request.POST.get('observaciones', registro.observaciones)
         registro.estado_liquidaciones = request.POST.get('estado_liquidaciones', registro.estado_liquidaciones)
         registro.fecha_sistemas = datetime.now()
-
         
         # Save the updated registro
         registro.save()
@@ -69,9 +73,22 @@ def eliminar_registro(request, id_registro):
     else:
         return HttpResponse('Método no permitido')
 
-def login(request):
+def autenticar_login(request):
     usuarios = Usuario.objects.order_by("id_usuario")
     template = loader.get_template("tickets/login.html") #codigo frontend
     context = {"usuarios": usuarios} #el contexto son los objetos de python que voy a mostrar
     return render(request, "tickets/login.html", context)
 
+#def login_view(request):
+#    if request.method == 'POST':
+#        form = AuthenticationForm(request, request.POST)
+#        if form.is_valid():
+#            username = form.cleaned_data['username']
+#            password = form.cleaned_data['password']
+#            user = authenticate(username=username, password=password)
+#            if user is not None:
+#                login(request, user)
+#                return redirect('home')  # Redirect to the home page after successful login
+#    else:
+#        form = AuthenticationForm()
+#    return render(request, "tickets/login.html", {'form': form})
