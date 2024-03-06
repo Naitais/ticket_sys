@@ -5,18 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <div id="nav_var">
-        <title> Tickets Sistemas </title>
-        <button></button>
-        <button></button>
-    </div>
-
     <link rel="stylesheet" type="text/css" href="{% static 'style sheet/style.css' %}">
     
 </head>
 <body>
-    <div id="titulo_principal"><h2>Sistema de Tickets</h2></div>
+    
+    <div id="nav_var">
+        <div id="titulo_principal"><h2>Sistema de Tickets</h2></div>    
+        <div><button>Cerrar Sesion</button></div>
+        <div><button> Ir a ticketera </button></div>
+        <div><button> Ir a histórico de tickets </button></div>
+    </div>
     {% if regitros %}
     <table id="tickets">
         <div>
@@ -87,6 +86,7 @@
         <h3 class="titulo_pantalla_emergente">MODIFICAR TICKET PANTALLA</h3>
         <form id="ticket_informacion">
             {% csrf_token %}
+
             <input class="input_form" type="number" id="concepto_modificar" name="Concepto" placeholder="Concepto">
             <input class="input_form" type="text" id="empresa_modificar" name="Empresa" placeholder="Empresa">
             <input class="input_form"  type="number" id="legajo_modificar" name="Legajo" placeholder="Legajo">

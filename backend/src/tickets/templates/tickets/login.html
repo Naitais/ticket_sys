@@ -1,1 +1,46 @@
-PANTALLA LOGIN
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'style sheet/style.css' %}">
+    
+</head>
+<body>
+    LOGIN PANTALLA
+    {% if usuarios %}
+    <table>
+        <div>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>USUARIO</th>
+                <th>CONCEPTO</th>
+                <th>EMPRESA</th>
+            </tr>
+        </thead>
+        </div>
+        
+        <tbody>
+            {% for usuario in usuarios %}
+                <div >
+                    <tr>
+                        <td>{{ usuario.id_usuario }}</td>
+                        <td>{{ usuario.usuario }}</td>
+                        <td>{{ usuario.contraseña }}</td>
+                        <td>{{ usuario.email }}</td>
+                    </tr>
+                </div>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>NO HAY TICKETS PARA MOSTRAR.</p>
+{% endif %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'javascript/script.js' %}"></script>
+</body>
+</html>
+

@@ -9,4 +9,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('explorer/', query, name='explorer'),
     path('explorer/', include('explorer.urls')),
+    
 ]

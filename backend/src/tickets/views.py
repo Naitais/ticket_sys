@@ -5,7 +5,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from rest_framework.generics import DestroyAPIView
-from .models import  Registro
+from .models import  Registro, Usuario
 from .serializer  import TicketSerializer
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -68,4 +68,10 @@ def eliminar_registro(request, id_registro):
         return HttpResponse('Registro eliminado con éxito')
     else:
         return HttpResponse('Método no permitido')
+
+def login(request):
+    usuarios = Usuario.objects.order_by("id_usuario")
+    template = loader.get_template("tickets/login.html") #codigo frontend
+    context = {"usuarios": usuarios} #el contexto son los objetos de python que voy a mostrar
+    return render(request, "tickets/login.html", context)
 
