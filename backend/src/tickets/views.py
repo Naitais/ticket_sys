@@ -27,10 +27,14 @@ class TicketView(ListAPIView):
     permission_classes = [AllowAny]
 
 def index(request):
-    regitros = Registro.objects.order_by("id_registro")
-    template = loader.get_template("tickets/index.html") #codigo frontend
-    context = {"regitros": regitros} #el contexto son los objetos de python que voy a mostrar
-    return render(request, "tickets/index.html", context)
+    #solo entra al menu de tickets si la variable de sesion es true
+    if request.session.get('usuario_logueado'):
+        regitros = Registro.objects.order_by("id_registro")
+        template = loader.get_template("tickets/index.html") #codigo frontend
+        context = {"regitros": regitros} #el contexto son los objetos de python que voy a mostrar
+        return render(request, "tickets/index.html", context)
+    else:
+        return redirect('http://127.0.0.1:8000/api/login/')
 
 def nuevo_ticket(request):
     if request.method == 'POST':
@@ -46,10 +50,10 @@ def nuevo_ticket(request):
 
 def modificar_registro(request, id_registro):
     if request.method == 'POST':
-        # Get the existing registro object
+        # busco el registro segun la id que paso el usuario
         registro = get_object_or_404(Registro, pk=id_registro)
         
-        # Update the fields with the data from the POST request
+        # sobreescribo los valores del registro con lo nuevo
         registro.concepto = request.POST.get('concepto', registro.concepto)
         registro.empresa = request.POST.get('empresa', registro.empresa)
         registro.legajo = request.POST.get('legajo', registro.legajo)
@@ -58,7 +62,7 @@ def modificar_registro(request, id_registro):
         registro.estado_liquidaciones = request.POST.get('estado_liquidaciones', registro.estado_liquidaciones)
         registro.fecha_sistemas = datetime.now()
         
-        # Save the updated registro
+        # guardo en la base de datos
         registro.save()
         
         return HttpResponse(f"Registro actualizado exitosamente.")
@@ -74,21 +78,31 @@ def eliminar_registro(request, id_registro):
         return HttpResponse('Método no permitido')
 
 def autenticar_login(request):
-    usuarios = Usuario.objects.order_by("id_usuario")
-    template = loader.get_template("tickets/login.html") #codigo frontend
-    context = {"usuarios": usuarios} #el contexto son los objetos de python que voy a mostrar
-    return render(request, "tickets/login.html", context)
+    if request.method == 'POST':
+        usuario_input = request.POST.get('usuario')
+        print(usuario_input)
+        contraseña_input = request.POST.get('contraseña')
+        print(contraseña_input)
+        # filtro todos los usuarios y engancho el primero que coincida con las credenciales del request
+        user = Usuario.objects.filter(usuario=usuario_input, contraseña=contraseña_input).first()
+        
+        #si existen el usuario y la contraseña entonces entra
+        if user.usuario and user.contraseña:
+            
+            #cuando loguea seteo la variable de sesion como true
+            request.session['usuario_logueado'] = True
+            #return redirect('http://127.0.0.1:8000/api/tickets/')  # el redirect no me funciona
+            return HttpResponse('éxito')
+        else:
+            
+            #error
+            return HttpResponse('error')
+            
+    else:
+        
+        #eliminamos usuario logueado de la sesion del request solo si existe
+        if 'usuario_logueado' in request.session:
+            del request.session['usuario_logueado']
 
-#def login_view(request):
-#    if request.method == 'POST':
-#        form = AuthenticationForm(request, request.POST)
-#        if form.is_valid():
-#            username = form.cleaned_data['username']
-#            password = form.cleaned_data['password']
-#            user = authenticate(username=username, password=password)
-#            if user is not None:
-#                login(request, user)
-#                return redirect('home')  # Redirect to the home page after successful login
-#    else:
-#        form = AuthenticationForm()
-#    return render(request, "tickets/login.html", {'form': form})
+        #cuando solo entramos a la pagina y no hay ningun request
+        return render(request, 'tickets/login.html')

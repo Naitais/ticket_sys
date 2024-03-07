@@ -12,8 +12,7 @@
     
     <div id="nav_var">
         <div id="titulo_principal"><h2>Sistema de Tickets</h2></div>    
-        <div><button> Cerrar Sesion </button></div>
-        <div><button> Ir a ticketera </button></div>
+        <div><button id="cerrar_sesion_btn"> Cerrar Sesion </button></div>
         <div><button> Ir a histórico de tickets </button></div>
     </div>
     {% if regitros %}
@@ -65,7 +64,7 @@
     <div class="contenedor_ventana">
         <h3 class="titulo_pantalla_emergente">CREAR NUEVO TICKET</h3>
         <form id="entryForm" class="contenedor_columna">
-        {% csrf_token %}
+            {% csrf_token %}
 
             <div class="contenedor_fila">
                 <span>Concepto</span>

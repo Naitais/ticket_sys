@@ -25,5 +25,6 @@ class Usuario(models.Model):
     contraseña = models.CharField(max_length = 50)
     email = models.CharField(max_length = 50)
     es_soporte = models.IntegerField
+    usuario_logueado = models.IntegerField
 
 

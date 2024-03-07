@@ -9,6 +9,7 @@ var aceptar_nuevo_ticket_btn = document.getElementById("aceptar_nuevo_ticket_btn
 var cancelar_nuevo_ticket_btn = document.getElementById("cancelar_nuevo_ticket_btn");
 var row_modificar_btn = document.getElementsByClassName("row_modificar_btn");
 var row_eliminar_btn = document.getElementsByClassName("row_eliminar_btn");
+var cerrar_sesion_btn = document.getElementById("cerrar_sesion_btn");
 //var cancelar_cambios_btn = document.getElementById("cancelar_cambios_btn")
 //var aceptar_cambios_btn = document.getElementById("aceptar_cambios_btn")
 
@@ -18,8 +19,19 @@ var ticket_rows = document.getElementsByClassName("ticket_row");
 //obtengo los inputs del form para modificar su placehold text
 var input_form_campo = document.getElementsByClassName("input_form");
 
-// variable para guardar el id del 
+// variable para guardar el id del ticket seleccionado
 var ticket_id
+
+// variable para el usuario logueado
+var usuario_logueado
+
+// function para cerrar sesion
+cerrar_sesion_btn.onclick = function(){
+    usuario_logueado = null
+    window.location.href = '/api/login/';
+
+}
+
 
 for (var i = 0; i < ticket_rows.length; i++) {
     ticket_rows[i].addEventListener("mouseout", function(event) {
@@ -210,6 +222,10 @@ aceptar_eliminar_ticket_btn.onclick = function(e) {
         }
     });
 };
+
+
+
+
 
 var dropdown_test_span = document.getElementById("dropdown_test_span");
 var drop_down_container = document.getElementsByClassName("drop_down_container")

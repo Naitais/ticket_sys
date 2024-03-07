@@ -9,40 +9,10 @@
     
 </head>
 <body>
-    LOGIN PANTALLA
-    {% if usuarios %}
-    <table>
-        <div>
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>USUARIO</th>
-                <th>CONTRASEÑA</th>
-                <th>EMAIL</th>
-            </tr>
-        </thead>
-        </div>
-        
-        <tbody>
-            {% for usuario in usuarios %}
-                <div >
-                    <tr>
-                        <td>{{ usuario.id_usuario }}</td>
-                        <td>{{ usuario.usuario }}</td>
-                        <td>{{ usuario.contraseña }}</td>
-                        <td>{{ usuario.email }}</td>
-                    </tr>
-                </div>
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <p>NO HAY TICKETS PARA MOSTRAR.</p>
-{% endif %}
 
 <div id="iniciar_sesion_pantalla">
     <div class="contenedor_ventana">
-        <h3 class="titulo_pantalla_emergente">INICIAR SESION PANTALLA</h3>
+        <h3 class="titulo_pantalla_emergente">INICIAR SESION</h3>
         <form id="ticket_informacion">
             {% csrf_token %}
             <div class="contenedor_columna">

@@ -1,0 +1,5 @@
+django
+django-sql-explorer
+djangorestframework
+markdown
+django-filter
