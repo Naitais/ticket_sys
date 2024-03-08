@@ -23,7 +23,7 @@ var input_form_campo = document.getElementsByClassName("input_form");
 var ticket_id
 
 // variable para el usuario logueado
-var usuario_logueado
+var usuario_logueado = document.getElementById("usuario_logueado").textContent;
 
 // function para cerrar sesion
 cerrar_sesion_btn.onclick = function(){
@@ -67,10 +67,11 @@ cancelar_nuevo_ticket_btn.onclick = function() {
     modal.style.display = "none";
   }
 
-
 aceptar_nuevo_ticket_btn.onclick = function(e) {
     //armo los datos del post request obteniendo la info que cargo en cada id del form que cree en el index de html
+
     var data = {
+        usuario: usuario_logueado,
         concepto: $("#concepto").val(),
         empresa: $("#empresa").val(),
         legajo: $("#legajo").val(),

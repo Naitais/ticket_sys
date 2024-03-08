@@ -14,6 +14,7 @@
         <div id="titulo_principal"><h2>Sistema de Tickets</h2></div>    
         <div><button id="cerrar_sesion_btn"> Cerrar Sesion </button></div>
         <div><button> Ir a histórico de tickets </button></div>
+        <div><h3 id="usuario_logueado">Usuario: {{ usuario_logueado }}</h3></div>
     </div>
     {% if regitros %}
     <table id="tickets">
@@ -39,7 +40,7 @@
                     <tr class="ticket_row">
                         <td>{{ ticket.id_registro }}</td>
                         <td>{{ ticket.fecha_liquidaciones }}</td>
-                        <td>{{ ticket.operador_liquidaciones }}</td>
+                        <td>{{ ticket.usuario }}</td>
                         <td>{{ ticket.concepto }}</td>
                         <td>{{ ticket.empresa }}</td>
                         <td>{{ ticket.legajo }}</td>
@@ -65,6 +66,7 @@
         <h3 class="titulo_pantalla_emergente">CREAR NUEVO TICKET</h3>
         <form id="entryForm" class="contenedor_columna">
             {% csrf_token %}
+
 
             <div class="contenedor_fila">
                 <span>Concepto</span>

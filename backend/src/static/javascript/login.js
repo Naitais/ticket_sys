@@ -17,7 +17,6 @@ iniciar_sesion_btn.onclick = function(e) {
          success: function(response) {
             //si existe el usuario en la base de datos
             console.log("Inicio de sesión exitoso", response);
-            console.log("asd")
             window.location.href = '/api/tickets/';
             
          },

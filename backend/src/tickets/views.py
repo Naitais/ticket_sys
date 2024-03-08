@@ -29,22 +29,25 @@ class TicketView(ListAPIView):
 def index(request):
     #solo entra al menu de tickets si la variable de sesion es true
     if request.session.get('usuario_logueado'):
+        
         regitros = Registro.objects.order_by("id_registro")
         template = loader.get_template("tickets/index.html") #codigo frontend
-        context = {"regitros": regitros} #el contexto son los objetos de python que voy a mostrar
+        context = {"regitros": regitros,
+                   "usuario_logueado": request.session['username']} #el contexto son los objetos de python que voy a mostrar
         return render(request, "tickets/index.html", context)
     else:
         return redirect('http://127.0.0.1:8000/api/login/')
 
 def nuevo_ticket(request):
     if request.method == 'POST':
+        usuario = request.session['username']
         concepto =request.POST['concepto']
         empresa =request.POST['empresa']
         legajo =request.POST['legajo']
         nombre =request.POST['nombre']
         observaciones =request.POST['observaciones']
     
-    nuevo_ticket = Registro(concepto= concepto, empresa = empresa, legajo = legajo, nombre = nombre, observaciones = observaciones)
+    nuevo_ticket = Registro(usuario = usuario,concepto= concepto, empresa = empresa, legajo = legajo, nombre = nombre, observaciones = observaciones)
     nuevo_ticket.save()
     return HttpResponse("FUNCIONO")
 
@@ -80,9 +83,9 @@ def eliminar_registro(request, id_registro):
 def autenticar_login(request):
     if request.method == 'POST':
         usuario_input = request.POST.get('usuario')
-        print(usuario_input)
+        
         contraseña_input = request.POST.get('contraseña')
-        print(contraseña_input)
+        
         # filtro todos los usuarios y engancho el primero que coincida con las credenciales del request
         user = Usuario.objects.filter(usuario=usuario_input, contraseña=contraseña_input).first()
         
@@ -91,6 +94,7 @@ def autenticar_login(request):
             
             #cuando loguea seteo la variable de sesion como true
             request.session['usuario_logueado'] = True
+            request.session['username'] = user.usuario
             #return redirect('http://127.0.0.1:8000/api/tickets/')  # el redirect no me funciona
             return HttpResponse('éxito')
         else:
@@ -103,6 +107,7 @@ def autenticar_login(request):
         #eliminamos usuario logueado de la sesion del request solo si existe
         if 'usuario_logueado' in request.session:
             del request.session['usuario_logueado']
+            del request.session['username']
 
         #cuando solo entramos a la pagina y no hay ningun request
         return render(request, 'tickets/login.html')
