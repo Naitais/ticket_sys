@@ -1,40 +1,49 @@
 #bridge between backend and frontend
 
-from rest_framework.generics import ListAPIView
-#from rest_framework.response import Response
-from rest_framework import generics
-from rest_framework.permissions import AllowAny
-from rest_framework.generics import DestroyAPIView
 from .models import  Registro, Usuario
-from .serializer  import TicketSerializer
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
-from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from .models import Registro
-from datetime import datetime
-
-#for login
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
+import datetime
 
-#muestro tickets
-class TicketView(ListAPIView):
-    queryset = Registro.objects.all()
-    serializer_class = TicketSerializer
-    permission_classes = [AllowAny]
+#funcion para obtener el mes o año de una fecha pasada como string
+def obtener_año_o_mes(año_o_mes: str, fecha_string: str):
+    if año_o_mes == "año":
+        registro_año: int = fecha_string[0:4]
+        return registro_año
+    
+    elif año_o_mes == "mes":
+        registro_mes: int = fecha_string[5:7]
+        return registro_mes
 
 def index(request):
     #solo entra al menu de tickets si la variable de sesion es true
     if request.session.get('usuario_logueado'):
-        
-        regitros = Registro.objects.order_by("id_registro")
+        registros = Registro.objects.order_by("id_registro")
+        fecha_actual = str(datetime.date.today())
+
+        #obtengo mes actual para pasarlo al front end
+        request.session['mes_liquidacion'] = datetime.date.today().month
+        request.session['año_liquidacion'] = datetime.date.today().year
+
+        #para guardar los registros filtrados
+        registros_filtrados: list = []
+
+        #compara cada registro y solo se queda con los del mes y año actuales
+        for registro in registros:
+            if obtener_año_o_mes("año", registro.fecha_liquidaciones) == obtener_año_o_mes("año", fecha_actual):
+                if obtener_año_o_mes("mes", registro.fecha_liquidaciones) == obtener_año_o_mes("mes", fecha_actual):
+                    registros_filtrados.append(registro)
+
         template = loader.get_template("tickets/index.html") #codigo frontend
-        context = {"regitros": regitros,
-                   "usuario_logueado": request.session['username']} #el contexto son los objetos de python que voy a mostrar
-        return render(request, "tickets/index.html", context)
+        contexto: dict = {"regitros": registros_filtrados,
+                "usuario_logueado": request.session['username'],
+                "mes_liquidacion": request.session['mes_liquidacion'],
+                "año_liquidacion": request.session['año_liquidacion']} #el contexto son los objetos de python que voy a mostrar
+        return render(request, "tickets/index.html", contexto)
     else:
         return redirect('http://127.0.0.1:8000/api/login/')
 
@@ -127,5 +136,5 @@ def historico_tickets(request):
         
     regitros = Registro.objects.order_by("id_registro")
     template = loader.get_template("tickets/historico.html") #codigo frontend
-    context = {"regitros": regitros} #el contexto son los objetos de python que voy a mostrar
-    return render(request, "tickets/historico.html", context)
+    contexto: dict = {"regitros": regitros} #el contexto son los objetos de python que voy a mostrar
+    return render(request, "tickets/historico.html", contexto)

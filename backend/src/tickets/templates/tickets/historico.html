@@ -9,7 +9,36 @@
     
 </head>
 <body>
-<h1 class="titulo_pantalla_emergente">HISTORICO DE TICKETS</h1>
+<div id="nav_var">
+    <div id="titulo_principal"><h2>CONSULTAS EN HISTORICO DE TICKETS</h2></div>    
+    <div><button id="ticketera_btn"> Volver a ticketera </button></div>  
+    <div><button id="cerrar_sesion_btn"> Cerrar Sesion </button></div>
+    
+</div>
+
+<div id="consulta_tickets_historicos">
+    
+    <div class="contenedor_ventana">
+        <h3 class="titulo_pantalla_emergente">FILTRAR TICKETS POR MES Y AÑO</h3>
+        <form class="contenedor_columna">
+            {% csrf_token %}
+
+            <div class="contenedor_fila">
+                <span>Mes</span>
+                <input type="number" id="mes" name="Mes" placeholder="mes">
+            </div>
+
+            <div class="contenedor_fila">
+                <span>Año</span>
+                <input type="number" id="año" name="Año" placeholder="año">
+            </div>
+
+        </form>
+        <div>
+            <button type="submit" id="filtrar_tickets_btn">Filtrar</button>
+        </div>
+    </div>
+</div>
 
 {% if regitros %}
     <table id="tickets">

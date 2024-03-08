@@ -12,9 +12,11 @@
     
     <div id="nav_var">
         <div id="titulo_principal"><h2>Sistema de Tickets</h2></div>    
-        <div><button id="cerrar_sesion_btn"> Cerrar Sesion </button></div>
         <div><button id="historico_tickets_btn"> Ir a histórico de tickets </button></div>
         <div><h3 id="usuario_logueado">Usuario: {{ usuario_logueado }}</h3></div>
+        <div><h3 id="usuario_logueado">Fecha de liquidación: mes {{ mes_liquidacion }} del año {{ año_liquidacion }}</h3></div>
+        <div><button id="cerrar_sesion_btn"> Cerrar Sesion </button></div>
+        
     </div>
     {% if regitros %}
     <table id="tickets">
@@ -60,7 +62,7 @@
 
 <button id="nuevo_ticket_btn">Nuevo Ticket</button>
 
-<div id="modal" class="ventana_emergente"> 
+<div id="modal" class="ventana_emergente">
     
     <div class="contenedor_ventana">
         <h3 class="titulo_pantalla_emergente">CREAR NUEVO TICKET</h3>
