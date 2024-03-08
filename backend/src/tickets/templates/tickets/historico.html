@@ -1,4 +1,3 @@
-PANTALLA HISTORICOS
 {% load static %}
 
 <!DOCTYPE html>
@@ -12,6 +11,45 @@ PANTALLA HISTORICOS
 <body>
 <h1 class="titulo_pantalla_emergente">HISTORICO DE TICKETS</h1>
 
+{% if regitros %}
+    <table id="tickets">
+        <div>
+            <thead id="cabecera_de_tabla_tickets">
+            <tr>
+                <th>ID</th>
+                <th>FECHA</th>
+                <th>USUARIO</th>
+                <th>CONCEPTO</th>
+                <th>EMPRESA</th>
+                <th>LEGAJO</th>
+                <th>NOMBRE AGENTE</th>
+                <th>OBSERVACIONES</th>
+                <th>ESTADO TICKET</th>
+            </tr>
+        </thead>
+        </div>
+        
+        <tbody>
+            {% for ticket in regitros %}
+                <div >
+                    <tr class="ticket_row">
+                        <td>{{ ticket.id_registro }}</td>
+                        <td>{{ ticket.fecha_liquidaciones }}</td>
+                        <td>{{ ticket.usuario }}</td>
+                        <td>{{ ticket.concepto }}</td>
+                        <td>{{ ticket.empresa }}</td>
+                        <td>{{ ticket.legajo }}</td>
+                        <td>{{ ticket.nombre }}</td>
+                        <td>{{ ticket.observaciones }}</td>
+                        <td>{{ ticket.estado_liquidaciones }}</td>
+                    </tr>
+                </div>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>NO HAY TICKETS PARA MOSTRAR.</p>
+{% endif %}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'javascript/historico.js' %}"></script>

@@ -124,7 +124,6 @@ def nuevo_usuario(request):
     return HttpResponse("FUNCIONO")
 
 def historico_tickets(request):
-    #solo entra al menu de tickets si la variable de sesion es true
         
     regitros = Registro.objects.order_by("id_registro")
     template = loader.get_template("tickets/historico.html") #codigo frontend

@@ -29,21 +29,17 @@ var usuario_logueado = document.getElementById("usuario_logueado").textContent;
 cerrar_sesion_btn.onclick = function(){
     usuario_logueado = null
     window.location.href = '/api/login/';
-
 }
 
-// funcion para cerrar sesion
+// funcion para ir a historicos
 historico_tickets_btn.onclick = function(){
     window.location.href = '/api/historico-tickets/';
 }
 
-
-
 for (var i = 0; i < ticket_rows.length; i++) {
     ticket_rows[i].addEventListener("mouseout", function(event) {
         // afecto al parent del target
-        //event.target.parentElement.style.backgroundColor = "white";
-        
+        //event.target.parentElement.style.backgroundColor = "white"; 
     });
 }
 
