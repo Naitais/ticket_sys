@@ -9,11 +9,12 @@
     
 </head>
 <body>
-
+<h1 class="titulo_pantalla_emergente">SISTEMA DE TICKETS</h1>
 <div id="iniciar_sesion_pantalla">
     <div class="contenedor_ventana">
+        
         <h3 class="titulo_pantalla_emergente">INICIAR SESION</h3>
-        <form id="ticket_informacion">
+        <form>
             {% csrf_token %}
             <div class="contenedor_columna">
                 <div><input class="input_form" type="text" id="usuario_login" name="Usuario" placeholder="Usuario"></div>
@@ -23,6 +24,35 @@
         <div>
             <button type="submit"id="iniciar_sesion_btn">Iniciar sesion</button>
             <button type="submit"id="crear_cuenta_btn">Crear cuenta</button>
+        </div>
+    </div>
+</div>
+
+<div id="crear_nuevo_usuario" class="ventana_emergente"> 
+    
+    <div class="contenedor_ventana">
+        <h3 class="titulo_pantalla_emergente">CREAR NUEVO USUARIO</h3>
+        <form  class="contenedor_columna">
+            {% csrf_token %}
+
+            <div class="contenedor_fila">
+                <span>Usuario</span>
+                <input type="text" id="usuario_nuevo" name="Usuario" placeholder="usuario">
+            </div>
+
+            <div class="contenedor_fila">
+                <span>Contraseña</span>
+                <input type="text" id="contraseña_nuevo" name="Contraseña" placeholder="contraseña">
+            </div>
+
+            <div class="contenedor_fila">
+                <span>Email</span>
+                <input type="text" id="email_nuevo" name="Email" placeholder="email">
+            </div>
+        </form>
+        <div>
+            <button type="submit" id="aceptar_nuevo_usuario_btn">Aceptar</button>
+            <button type="submit"id="cancelar_nuevo_usuario_btn">Cancelar</button>
         </div>
     </div>
 </div>

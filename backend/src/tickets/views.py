@@ -68,7 +68,7 @@ def modificar_registro(request, id_registro):
         # guardo en la base de datos
         registro.save()
         
-        return HttpResponse(f"Registro actualizado exitosamente.")
+        return HttpResponse("Registro actualizado exitosamente.")
     else:
         return HttpResponse("Este endpoint solo acepta solicitudes POST para actualizar registros.")
     
@@ -93,6 +93,7 @@ def autenticar_login(request):
         if user.usuario and user.contraseña:
             
             #cuando loguea seteo la variable de sesion como true
+            # y obtengo el nombre de usuario
             request.session['usuario_logueado'] = True
             request.session['username'] = user.usuario
             #return redirect('http://127.0.0.1:8000/api/tickets/')  # el redirect no me funciona
@@ -111,3 +112,21 @@ def autenticar_login(request):
 
         #cuando solo entramos a la pagina y no hay ningun request
         return render(request, 'tickets/login.html')
+    
+def nuevo_usuario(request):
+    if request.method == 'POST':
+        usuario = request.POST['usuario']
+        contraseña =request.POST['contraseña']
+        email =request.POST['email']
+    
+    nuevo_usuario = Usuario(usuario = usuario,contraseña= contraseña, email = email)
+    nuevo_usuario.save()
+    return HttpResponse("FUNCIONO")
+
+def historico_tickets(request):
+    #solo entra al menu de tickets si la variable de sesion es true
+        
+    regitros = Registro.objects.order_by("id_registro")
+    template = loader.get_template("tickets/historico.html") #codigo frontend
+    context = {"regitros": regitros} #el contexto son los objetos de python que voy a mostrar
+    return render(request, "tickets/historico.html", context)

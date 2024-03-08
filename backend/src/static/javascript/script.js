@@ -25,12 +25,18 @@ var ticket_id
 // variable para el usuario logueado
 var usuario_logueado = document.getElementById("usuario_logueado").textContent;
 
-// function para cerrar sesion
+// funcion para cerrar sesion
 cerrar_sesion_btn.onclick = function(){
     usuario_logueado = null
     window.location.href = '/api/login/';
 
 }
+
+// funcion para cerrar sesion
+historico_tickets_btn.onclick = function(){
+    window.location.href = '/api/historico-tickets/';
+}
+
 
 
 for (var i = 0; i < ticket_rows.length; i++) {
@@ -103,6 +109,8 @@ aceptar_nuevo_ticket_btn.onclick = function(e) {
     });
 };
 
+
+// SOLO DEBO MODIFICAR SI EL USUARIO ES EL MISMO QUE CREO EL TICKET
 // funcion para modificar un ticket
 row_modificar_btn.onclick = function() {
   }
@@ -223,10 +231,6 @@ aceptar_eliminar_ticket_btn.onclick = function(e) {
         }
     });
 };
-
-
-
-
 
 var dropdown_test_span = document.getElementById("dropdown_test_span");
 var drop_down_container = document.getElementsByClassName("drop_down_container")
