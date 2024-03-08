@@ -63,7 +63,6 @@ def modificar_registro(request, id_registro):
         registro.nombre = request.POST.get('nombre', registro.nombre)
         registro.observaciones = request.POST.get('observaciones', registro.observaciones)
         registro.estado_liquidaciones = request.POST.get('estado_liquidaciones', registro.estado_liquidaciones)
-        registro.fecha_sistemas = datetime.now()
         
         # guardo en la base de datos
         registro.save()
@@ -104,13 +103,14 @@ def autenticar_login(request):
             return HttpResponse('error')
             
     else:
+        #cuando solo entramos a la pagina login y no hay ningun request
         
         #eliminamos usuario logueado de la sesion del request solo si existe
         if 'usuario_logueado' in request.session:
             del request.session['usuario_logueado']
             del request.session['username']
 
-        #cuando solo entramos a la pagina y no hay ningun request
+        
         return render(request, 'tickets/login.html')
     
 def nuevo_usuario(request):
