@@ -20,17 +20,18 @@
     
     <div class="contenedor_ventana">
         <h3 class="titulo_pantalla_emergente">FILTRAR TICKETS POR MES Y AÑO</h3>
+        <h5 class="titulo_pantalla_emergente">Ejemplos de meses correctos: "03", "08", "11".</h5>
         <form class="contenedor_columna">
             {% csrf_token %}
 
             <div class="contenedor_fila">
                 <span>Mes</span>
-                <input type="number" id="mes" name="Mes" placeholder="mes">
+                <input type="text" id="mes" name="Mes" placeholder="mes">
             </div>
 
             <div class="contenedor_fila">
                 <span>Año</span>
-                <input type="number" id="año" name="Año" placeholder="año">
+                <input type="text" id="año" name="Año" placeholder="año">
             </div>
 
         </form>
@@ -40,46 +41,8 @@
     </div>
 </div>
 
-{% if regitros %}
-    <table id="tickets">
-        <div>
-            <thead id="cabecera_de_tabla_tickets">
-            <tr>
-                <th>ID</th>
-                <th>FECHA</th>
-                <th>USUARIO</th>
-                <th>CONCEPTO</th>
-                <th>EMPRESA</th>
-                <th>LEGAJO</th>
-                <th>NOMBRE AGENTE</th>
-                <th>OBSERVACIONES</th>
-                <th>ESTADO TICKET</th>
-            </tr>
-        </thead>
-        </div>
-        
-        <tbody>
-            {% for ticket in regitros %}
-                <div >
-                    <tr class="ticket_row">
-                        <td>{{ ticket.id_registro }}</td>
-                        <td>{{ ticket.fecha_liquidaciones }}</td>
-                        <td>{{ ticket.usuario }}</td>
-                        <td>{{ ticket.concepto }}</td>
-                        <td>{{ ticket.empresa }}</td>
-                        <td>{{ ticket.legajo }}</td>
-                        <td>{{ ticket.nombre }}</td>
-                        <td>{{ ticket.observaciones }}</td>
-                        <td>{{ ticket.estado_liquidaciones }}</td>
-                    </tr>
-                </div>
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <p>NO HAY TICKETS PARA MOSTRAR.</p>
-{% endif %}
 
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'javascript/historico.js' %}"></script>
 </body>

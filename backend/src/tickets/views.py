@@ -138,3 +138,39 @@ def historico_tickets(request):
     template = loader.get_template("tickets/historico.html") #codigo frontend
     contexto: dict = {"regitros": regitros} #el contexto son los objetos de python que voy a mostrar
     return render(request, "tickets/historico.html", contexto)
+
+def historico_tickets_consulta(request):
+    registros = Registro.objects.order_by("id_registro")
+    if request.method == 'POST':
+        mes_input = request.POST['mes']
+        año_input = request.POST['año']
+        
+        request.session['consulta_mes_input'] = mes_input
+        request.session['consulta_año_input'] = año_input
+        #para guardar los registros filtrados
+        
+        return HttpResponse("exito")
+    else:
+        #contexto: dict = {"registros": registros} #el contexto son los objetos de python que voy a mostrar
+        return render(request, "tickets/historico.html")
+    
+def consulta_tickets(request):
+    registros = Registro.objects.order_by("id_registro")
+    if request.session['consulta_mes_input'] and request.session['consulta_año_input']:
+        registros_filtrados: list = []
+
+        #compara cada registro y solo se queda con los del mes y año actuales
+        for registro in registros:
+            if obtener_año_o_mes("año", registro.fecha_liquidaciones) == request.session['consulta_año_input']:
+                if obtener_año_o_mes("mes", registro.fecha_liquidaciones) == request.session['consulta_mes_input']:
+                    registros_filtrados.append(registro)
+        
+        print("MES",request.session['consulta_mes_input'])
+        print("AÑO",request.session['consulta_año_input'])
+
+        contexto: dict = {"registros": registros_filtrados} #el contexto son los objetos de python que voy a mostrar
+        return render(request, "tickets/consulta.html", contexto)
+    else:
+            
+        #error
+        return render(request, "tickets/consulta.html")

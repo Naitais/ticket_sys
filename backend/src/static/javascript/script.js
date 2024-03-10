@@ -43,21 +43,27 @@ for (var i = 0; i < ticket_rows.length; i++) {
     });
 }
 
-for (var i = 0; i < ticket_rows.length; i++) {
-    // busco la columna de estado de ticket y pinto de un color segun corresponda
-    var estado_ticket = ticket_rows[i].getElementsByTagName("td")[8].textContent;
-    if (estado_ticket == "Pendiente"){
-        ticket_rows[i].style.backgroundColor = "orange";
-    }
-
-    if (estado_ticket == "Verificar"){
-        ticket_rows[i].style.backgroundColor = "yellow";
-    }
-
-    if (estado_ticket == "Resuelto"){
-        ticket_rows[i].style.backgroundColor = "green";
+function pintar_tickets_segun_estado(){
+    // ticket row es una coleccion de elementos asi que hay que loopearlos
+    var ticket_rows = document.getElementsByClassName("ticket_row");
+    for (var i = 0; i < ticket_rows.length; i++) {
+        // busco la columna de estado de ticket y pinto de un color segun corresponda
+        var estado_ticket = ticket_rows[i].getElementsByTagName("td")[8].textContent;
+        if (estado_ticket == "Pendiente"){
+            ticket_rows[i].style.backgroundColor = "orange";
+        }
+    
+        if (estado_ticket == "Verificar"){
+            ticket_rows[i].style.backgroundColor = "yellow";
+        }
+    
+        if (estado_ticket == "Resuelto"){
+            ticket_rows[i].style.backgroundColor = "green";
+        }
     }
 }
+
+
 
 //muestro al hacer click
 nuevo_ticket_btn.onclick = function() {
@@ -246,4 +252,4 @@ drop_down_container[0].addEventListener("mouseover", function(event) {
 });
 
 
-
+pintar_tickets_segun_estado()
