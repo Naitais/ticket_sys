@@ -62,8 +62,6 @@ aceptar_nuevo_usuario_btn.onclick = function(e) {
           
       }
   });
-
-   alert(data.usuario)
 };
 
 crear_cuenta_btn.onclick = function(e) {

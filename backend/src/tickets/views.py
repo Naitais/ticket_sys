@@ -164,9 +164,6 @@ def consulta_tickets(request):
             if obtener_año_o_mes("año", registro.fecha_liquidaciones) == request.session['consulta_año_input']:
                 if obtener_año_o_mes("mes", registro.fecha_liquidaciones) == request.session['consulta_mes_input']:
                     registros_filtrados.append(registro)
-        
-        print("MES",request.session['consulta_mes_input'])
-        print("AÑO",request.session['consulta_año_input'])
 
         contexto: dict = {"registros": registros_filtrados} #el contexto son los objetos de python que voy a mostrar
         return render(request, "tickets/consulta.html", contexto)

@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(226, 248, 241);
+    background-color: rgb(121, 226, 193);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
@@ -48,6 +48,9 @@ body{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    background-color: rgb(96, 182, 20);
+    border-radius: 5px;
+    
 }
 
 .contenedor_columna{
