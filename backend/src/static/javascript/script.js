@@ -10,8 +10,6 @@ var cancelar_nuevo_ticket_btn = document.getElementById("cancelar_nuevo_ticket_b
 var row_modificar_btn = document.getElementsByClassName("row_modificar_btn");
 var row_eliminar_btn = document.getElementsByClassName("row_eliminar_btn");
 var cerrar_sesion_btn = document.getElementById("cerrar_sesion_btn");
-//var cancelar_cambios_btn = document.getElementById("cancelar_cambios_btn")
-//var aceptar_cambios_btn = document.getElementById("aceptar_cambios_btn")
 
 // ticket row es una coleccion de elementos asi que hay que loopearlos
 var ticket_rows = document.getElementsByClassName("ticket_row");
@@ -112,7 +110,6 @@ aceptar_nuevo_ticket_btn.onclick = function(e) {
 };
 
 
-// SOLO DEBO MODIFICAR SI EL USUARIO ES EL MISMO QUE CREO EL TICKET
 // funcion para modificar un ticket
 row_modificar_btn.onclick = function() {
   }
@@ -151,7 +148,6 @@ function llenarCampoPlaceholderForm(columnas){
 function capitalizar_string(string) {
     var primera_letra_mayuscula = string.charAt(0).toUpperCase()
     var string_resto = string.slice(1).toLowerCase()
-
     var string_capitalizado = primera_letra_mayuscula + string_resto
 
     // le saco espacios en caso de haberlos

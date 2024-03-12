@@ -2,10 +2,11 @@ from django.db import models
 import datetime
 import getpass
 
+#para tomar el nombre de usuario logueado en la sesion de la persona
 username = getpass.getuser()
 
-class Registro(models.Model):
-    id_registro = models.AutoField(primary_key=True)
+class Ticket(models.Model):
+    id_ticket = models.AutoField(primary_key=True)
     fecha_liquidaciones = models.TextField(default = datetime.date.today) #deberia ser fecha
     usuario = models.CharField(max_length=100)
     concepto = models.CharField(max_length=100) #deberia ser un entero

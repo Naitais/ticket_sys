@@ -41,7 +41,7 @@ aceptar_nuevo_usuario_btn.onclick = function(e) {
       email: $("#contraseña_nuevo").val(),
       csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
    };
-    // ajax nuevo ticket
+    // ajax nuevo usuario
     $.ajax({
       type: 'POST',
       url: '/api/nuevo-usuario/',

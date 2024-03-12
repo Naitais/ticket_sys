@@ -10,7 +10,7 @@
     
 </head>
 <body>
-{% if registros %}
+{% if tickets %}
     <div id="tickets_historicos_tabla">
         <table>
             <div>
@@ -30,10 +30,10 @@
             </div>
             
             <tbody>
-                {% for ticket in registros %}
+                {% for ticket in tickets %}
                     <div >
                         <tr class="ticket_row">
-                            <td>{{ ticket.id_registro }}</td>
+                            <td>{{ ticket.id_ticket }}</td>
                             <td>{{ ticket.fecha_liquidaciones }}</td>
                             <td>{{ ticket.usuario }}</td>
                             <td>{{ ticket.concepto }}</td>

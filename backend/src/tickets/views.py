@@ -1,45 +1,44 @@
 #bridge between backend and frontend
 
-from .models import  Registro, Usuario
+from .models import  Ticket, Usuario
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
 from django.shortcuts import get_object_or_404, render
-from .models import Registro
 from django.shortcuts import render, redirect
 import datetime
 
 #funcion para obtener el mes o año de una fecha pasada como string
 def obtener_año_o_mes(año_o_mes: str, fecha_string: str):
     if año_o_mes == "año":
-        registro_año: int = fecha_string[0:4]
-        return registro_año
+        ticket_año: int = fecha_string[0:4]
+        return ticket_año
     
     elif año_o_mes == "mes":
-        registro_mes: int = fecha_string[5:7]
-        return registro_mes
+        ticket_mes: int = fecha_string[5:7]
+        return ticket_mes
 
 def index(request):
     #solo entra al menu de tickets si la variable de sesion es true
     if request.session.get('usuario_logueado'):
-        registros = Registro.objects.order_by("id_registro")
+        tickets = Ticket.objects.order_by("id_ticket")
         fecha_actual = str(datetime.date.today())
 
         #obtengo mes actual para pasarlo al front end
         request.session['mes_liquidacion'] = datetime.date.today().month
         request.session['año_liquidacion'] = datetime.date.today().year
 
-        #para guardar los registros filtrados
-        registros_filtrados: list = []
+        #para guardar los tickets filtrados
+        tickets_filtrados: list = []
 
-        #compara cada registro y solo se queda con los del mes y año actuales
-        for registro in registros:
-            if obtener_año_o_mes("año", registro.fecha_liquidaciones) == obtener_año_o_mes("año", fecha_actual):
-                if obtener_año_o_mes("mes", registro.fecha_liquidaciones) == obtener_año_o_mes("mes", fecha_actual):
-                    registros_filtrados.append(registro)
-
+        #compara cada ticket y solo se queda con los del mes y año actuales
+        for ticket in tickets:
+            if obtener_año_o_mes("año", ticket.fecha_liquidaciones) == obtener_año_o_mes("año", fecha_actual):
+                if obtener_año_o_mes("mes", ticket.fecha_liquidaciones) == obtener_año_o_mes("mes", fecha_actual):
+                    tickets_filtrados.append(ticket)
+        print(tickets_filtrados)
         template = loader.get_template("tickets/index.html") #codigo frontend
-        contexto: dict = {"regitros": registros_filtrados,
+        contexto: dict = {"tickets": tickets_filtrados,
                 "usuario_logueado": request.session['username'],
                 "mes_liquidacion": request.session['mes_liquidacion'],
                 "año_liquidacion": request.session['año_liquidacion']} #el contexto son los objetos de python que voy a mostrar
@@ -56,35 +55,35 @@ def nuevo_ticket(request):
         nombre =request.POST['nombre']
         observaciones =request.POST['observaciones']
     
-    nuevo_ticket = Registro(usuario = usuario,concepto= concepto, empresa = empresa, legajo = legajo, nombre = nombre, observaciones = observaciones)
+    nuevo_ticket = Ticket(usuario = usuario,concepto= concepto, empresa = empresa, legajo = legajo, nombre = nombre, observaciones = observaciones)
     nuevo_ticket.save()
     return HttpResponse("FUNCIONO")
 
-def modificar_registro(request, id_registro):
+def modificar_ticket(request, id_ticket):
     if request.method == 'POST':
-        # busco el registro segun la id que paso el usuario
-        registro = get_object_or_404(Registro, pk=id_registro)
+        # busco el Ticket segun la id que paso el usuario
+        ticket = get_object_or_404(Ticket, pk=id_ticket)
         
-        # sobreescribo los valores del registro con lo nuevo
-        registro.concepto = request.POST.get('concepto', registro.concepto)
-        registro.empresa = request.POST.get('empresa', registro.empresa)
-        registro.legajo = request.POST.get('legajo', registro.legajo)
-        registro.nombre = request.POST.get('nombre', registro.nombre)
-        registro.observaciones = request.POST.get('observaciones', registro.observaciones)
-        registro.estado_liquidaciones = request.POST.get('estado_liquidaciones', registro.estado_liquidaciones)
+        # sobreescribo los valores del Ticket con lo nuevo
+        ticket.concepto = request.POST.get('concepto', ticket.concepto)
+        ticket.empresa = request.POST.get('empresa', ticket.empresa)
+        ticket.legajo = request.POST.get('legajo', ticket.legajo)
+        ticket.nombre = request.POST.get('nombre', ticket.nombre)
+        ticket.observaciones = request.POST.get('observaciones', ticket.observaciones)
+        ticket.estado_liquidaciones = request.POST.get('estado_liquidaciones', ticket.estado_liquidaciones)
         
         # guardo en la base de datos
-        registro.save()
+        ticket.save()
         
-        return HttpResponse("Registro actualizado exitosamente.")
+        return HttpResponse("Ticket actualizado exitosamente.")
     else:
-        return HttpResponse("Este endpoint solo acepta solicitudes POST para actualizar registros.")
+        return HttpResponse("Este endpoint solo acepta solicitudes POST para actualizar tickets.")
     
-def eliminar_registro(request, id_registro):
+def eliminar_ticket(request, id_ticket):
     if request.method == 'DELETE':
-        registro = get_object_or_404(Registro, pk=id_registro)
-        registro.delete()
-        return HttpResponse('Registro eliminado con éxito')
+        ticket = get_object_or_404(Ticket, pk=id_ticket)
+        ticket.delete()
+        return HttpResponse('Ticket eliminado con éxito')
     else:
         return HttpResponse('Método no permitido')
 
@@ -134,38 +133,38 @@ def nuevo_usuario(request):
 
 def historico_tickets(request):
         
-    regitros = Registro.objects.order_by("id_registro")
+    tickets = Ticket.objects.order_by("id_ticket")
     template = loader.get_template("tickets/historico.html") #codigo frontend
-    contexto: dict = {"regitros": regitros} #el contexto son los objetos de python que voy a mostrar
+    contexto: dict = {"tickets": tickets} #el contexto son los objetos de python que voy a mostrar
     return render(request, "tickets/historico.html", contexto)
 
 def historico_tickets_consulta(request):
-    registros = Registro.objects.order_by("id_registro")
+    tickets = Ticket.objects.order_by("id_ticket")
     if request.method == 'POST':
         mes_input = request.POST['mes']
         año_input = request.POST['año']
         
         request.session['consulta_mes_input'] = mes_input
         request.session['consulta_año_input'] = año_input
-        #para guardar los registros filtrados
+        #para guardar los tickets filtrados
         
         return HttpResponse("exito")
     else:
-        #contexto: dict = {"registros": registros} #el contexto son los objetos de python que voy a mostrar
+        #contexto: dict = {"tickets": tickets} #el contexto son los objetos de python que voy a mostrar
         return render(request, "tickets/historico.html")
     
 def consulta_tickets(request):
-    registros = Registro.objects.order_by("id_registro")
+    tickets = Ticket.objects.order_by("id_ticket")
     if request.session['consulta_mes_input'] and request.session['consulta_año_input']:
-        registros_filtrados: list = []
+        tickets_filtrados: list = []
 
-        #compara cada registro y solo se queda con los del mes y año actuales
-        for registro in registros:
-            if obtener_año_o_mes("año", registro.fecha_liquidaciones) == request.session['consulta_año_input']:
-                if obtener_año_o_mes("mes", registro.fecha_liquidaciones) == request.session['consulta_mes_input']:
-                    registros_filtrados.append(registro)
+        #compara cada Ticket y solo se queda con los del mes y año actuales
+        for ticket in tickets:
+            if obtener_año_o_mes("año", ticket.fecha_liquidaciones) == request.session['consulta_año_input']:
+                if obtener_año_o_mes("mes", ticket.fecha_liquidaciones) == request.session['consulta_mes_input']:
+                    tickets_filtrados.append(ticket)
 
-        contexto: dict = {"registros": registros_filtrados} #el contexto son los objetos de python que voy a mostrar
+        contexto: dict = {"tickets": tickets_filtrados} #el contexto son los objetos de python que voy a mostrar
         return render(request, "tickets/consulta.html", contexto)
     else:
             

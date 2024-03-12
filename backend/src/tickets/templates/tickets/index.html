@@ -18,7 +18,7 @@
         <div><button id="cerrar_sesion_btn"> Cerrar Sesion </button></div>
         
     </div>
-    {% if regitros %}
+    {% if tickets %}
     <table id="tickets">
         <div>
             <thead id="cabecera_de_tabla_tickets">
@@ -37,10 +37,10 @@
         </div>
         
         <tbody>
-            {% for ticket in regitros %}
+            {% for ticket in tickets %}
                 <div >
                     <tr class="ticket_row">
-                        <td>{{ ticket.id_registro }}</td>
+                        <td>{{ ticket.id_ticket }}</td>
                         <td>{{ ticket.fecha_liquidaciones }}</td>
                         <td>{{ ticket.usuario }}</td>
                         <td>{{ ticket.concepto }}</td>
@@ -151,7 +151,7 @@
 
 <div id="eliminar_ticket_pantalla" class="ventana_emergente">
     <div class="contenedor_ventana">
-        <h3 class="titulo_pantalla_emergente">¿DESEA ELIMINAR EL REGISTRO?</h3>
+        <h3 class="titulo_pantalla_emergente">¿DESEA ELIMINAR EL TICKET?</h3>
         <button type="submit"id="aceptar_eliminar_ticket_btn">Aceptar</button>
         <button type="submit"id="cancelar_eliminar_ticket_btn">Cancelar</button>
     </div>
