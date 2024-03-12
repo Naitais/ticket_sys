@@ -13,6 +13,7 @@ var cerrar_sesion_btn = document.getElementById("cerrar_sesion_btn");
 crear_cuenta_btn = document.getElementById("crear_cuenta_btn");
 aceptar_nuevo_usuario_btn = document.getElementById("aceptar_nuevo_usuario_btn");
 cancelar_nuevo_usuario_btn = document.getElementById("cancelar_nuevo_usuario_btn");
+
 // ticket row es una coleccion de elementos asi que hay que loopearlos
 var ticket_rows = document.getElementsByClassName("ticket_row");
 
@@ -25,31 +26,17 @@ var ticket_id
 // variable para el usuario logueado
 var usuario_logueado = document.getElementById("usuario_logueado").textContent;
 
-function habilita_o_deshabilita_creacion_usuario() {
-    //listado de usuarios que son de sistemas
-    var lista_usuarios_sistemas = ["enzofuentes","jorge","cristian"]
-
-    // si el usuario logueado es alguien de sistemas, mostrar el boton de creacion de usuarios
-    for (var i = 0; i < lista_usuarios_sistemas.length; i++) {
-        
-                
-        if (usuario_logueado.slice(9) == lista_usuarios_sistemas[i]) {
-        
-            crear_cuenta_btn.style.display = "block";
-        } else {
-            crear_cuenta_btn.style.display = "none";
-        }
-
-        
-    }
-
+// si el usuario logueado es alguien de sistemas, mostrar el boton de creacion de usuarios
+if (usuario_logueado.slice(9) == "enzofuentes" || usuario_logueado.slice(9) == "jorge" ) {
+    crear_cuenta_btn.style.display = "block";
+} else {
+    crear_cuenta_btn.style.display = "none";
 }
 
 // funcion para cerrar sesion
 cerrar_sesion_btn.onclick = function(){
     usuario_logueado = null
     window.location.href = '/api/login/';
-    
 }
 
 // funcion para ir a historicos
@@ -60,7 +47,14 @@ historico_tickets_btn.onclick = function(){
 for (var i = 0; i < ticket_rows.length; i++) {
     ticket_rows[i].addEventListener("mouseout", function(event) {
         // afecto al parent del target
-        //event.target.parentElement.style.backgroundColor = "white"; 
+        pintar_tickets_segun_estado()
+    });
+}
+
+for (var i = 0; i < ticket_rows.length; i++) {
+    ticket_rows[i].addEventListener("mouseover", function(event) {
+        // afecto al parent del target
+        event.target.parentElement.style.backgroundColor = "white"; 
     });
 }
 
