@@ -10,7 +10,9 @@ var cancelar_nuevo_ticket_btn = document.getElementById("cancelar_nuevo_ticket_b
 var row_modificar_btn = document.getElementsByClassName("row_modificar_btn");
 var row_eliminar_btn = document.getElementsByClassName("row_eliminar_btn");
 var cerrar_sesion_btn = document.getElementById("cerrar_sesion_btn");
-
+crear_cuenta_btn = document.getElementById("crear_cuenta_btn");
+aceptar_nuevo_usuario_btn = document.getElementById("aceptar_nuevo_usuario_btn");
+cancelar_nuevo_usuario_btn = document.getElementById("cancelar_nuevo_usuario_btn");
 // ticket row es una coleccion de elementos asi que hay que loopearlos
 var ticket_rows = document.getElementsByClassName("ticket_row");
 
@@ -23,10 +25,31 @@ var ticket_id
 // variable para el usuario logueado
 var usuario_logueado = document.getElementById("usuario_logueado").textContent;
 
+function habilita_o_deshabilita_creacion_usuario() {
+    //listado de usuarios que son de sistemas
+    var lista_usuarios_sistemas = ["enzofuentes","jorge","cristian"]
+
+    // si el usuario logueado es alguien de sistemas, mostrar el boton de creacion de usuarios
+    for (var i = 0; i < lista_usuarios_sistemas.length; i++) {
+        
+                
+        if (usuario_logueado.slice(9) == lista_usuarios_sistemas[i]) {
+        
+            crear_cuenta_btn.style.display = "block";
+        } else {
+            crear_cuenta_btn.style.display = "none";
+        }
+
+        
+    }
+
+}
+
 // funcion para cerrar sesion
 cerrar_sesion_btn.onclick = function(){
     usuario_logueado = null
     window.location.href = '/api/login/';
+    
 }
 
 // funcion para ir a historicos
@@ -167,8 +190,8 @@ aceptar_cambios_btn.onclick = function(e) {
         estado_liquidaciones: capitalizar_string($("#estado_liquidaciones_modificar").val()),
         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
     };
-    //toUpperCase()
-    alert(capitalizar_string($("#estado_liquidaciones_modificar").val()))
+    
+    
     // ajax modificacion de ticket
     $.ajax({
         type: 'POST',
@@ -242,5 +265,49 @@ aceptar_eliminar_ticket_btn.onclick = function(e) {
         }
     });
 };
+
+
+
+aceptar_nuevo_usuario_btn.onclick = function(e) {
+    var data = {
+       usuario: $("#usuario_nuevo").val(),
+       contraseña: $("#contraseña_nuevo").val(),
+       email: $("#contraseña_nuevo").val(),
+       csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+    };
+     // ajax nuevo usuario
+     $.ajax({
+       type: 'POST',
+       url: '/api/nuevo-usuario/',
+       data: data,
+       success: function(response) {
+           //mensaje de exito
+           console.log("Usuario creado con éxito.", response);
+           alert("Usuario creado con éxito.")
+           crear_nuevo_usuario.style.display = "none";
+           location.reload()
+           
+       },
+       error: function(xhr, status, error) {
+           //mensaje de error
+           console.error("Ocurrio un error al crear el usuario.", error);
+           alert("Ocurrio un error al crear el usuario.")
+           crear_nuevo_usuario.style.display = "none";
+           
+       }
+   });
+ };
+ 
+ crear_cuenta_btn.onclick = function(e) {
+    //armo los datos del post request obteniendo la info que cargo en cada id del form que cree en el index de html
+    //crear_nuevo_usuario
+  
+    crear_nuevo_usuario.style.display = "block";
+ };
+ 
+ cancelar_nuevo_usuario_btn.onclick = function(e) {
+    crear_nuevo_usuario.style.display = "none";
+ }
+
 
 pintar_tickets_segun_estado()

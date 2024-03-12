@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style sheet/style.css' %}">
     
 </head>
+
 <body>
     
     <div id="nav_var">
@@ -15,6 +16,7 @@
         <div><button id="historico_tickets_btn"> Ir a histórico de tickets </button></div>
         <div><h3 id="usuario_logueado">Usuario: {{ usuario_logueado }}</h3></div>
         <div><h3 id="usuario_logueado">Fecha de liquidación: mes {{ mes_liquidacion }} del año {{ año_liquidacion }}</h3></div>
+        <button type="submit"id="crear_cuenta_btn" style="display: none;">Crear usuario</button>
         <div><button id="cerrar_sesion_btn"> Cerrar Sesion </button></div>
         
     </div>
@@ -156,6 +158,36 @@
         <button type="submit"id="cancelar_eliminar_ticket_btn">Cancelar</button>
     </div>
 </div>
+
+<div id="crear_nuevo_usuario" class="ventana_emergente"> 
+    
+    <div class="contenedor_ventana">
+        <h3 class="titulo_pantalla_emergente">CREAR NUEVO USUARIO</h3>
+        <form  class="contenedor_columna">
+            {% csrf_token %}
+
+            <div class="contenedor_fila">
+                <span>Usuario</span>
+                <input type="text" id="usuario_nuevo" name="Usuario" placeholder="usuario">
+            </div>
+
+            <div class="contenedor_fila">
+                <span>Contraseña</span>
+                <input type="password" id="contraseña_nuevo" name="Contraseña" placeholder="contraseña">
+            </div>
+
+            <div class="contenedor_fila">
+                <span>Email</span>
+                <input type="text" id="email_nuevo" name="Email" placeholder="email">
+            </div>
+        </form>
+        <div>
+            <button type="submit" id="aceptar_nuevo_usuario_btn">Aceptar</button>
+            <button type="submit"id="cancelar_nuevo_usuario_btn">Cancelar</button>
+        </div>
+    </div>
+</div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'javascript/script.js' %}"></script>
 </body>

@@ -36,8 +36,7 @@ def index(request):
             if obtener_año_o_mes("año", ticket.fecha_liquidaciones) == obtener_año_o_mes("año", fecha_actual):
                 if obtener_año_o_mes("mes", ticket.fecha_liquidaciones) == obtener_año_o_mes("mes", fecha_actual):
                     tickets_filtrados.append(ticket)
-        print(tickets_filtrados)
-        template = loader.get_template("tickets/index.html") #codigo frontend
+
         contexto: dict = {"tickets": tickets_filtrados,
                 "usuario_logueado": request.session['username'],
                 "mes_liquidacion": request.session['mes_liquidacion'],
@@ -134,12 +133,10 @@ def nuevo_usuario(request):
 def historico_tickets(request):
         
     tickets = Ticket.objects.order_by("id_ticket")
-    template = loader.get_template("tickets/historico.html") #codigo frontend
     contexto: dict = {"tickets": tickets} #el contexto son los objetos de python que voy a mostrar
     return render(request, "tickets/historico.html", contexto)
 
 def historico_tickets_consulta(request):
-    tickets = Ticket.objects.order_by("id_ticket")
     if request.method == 'POST':
         mes_input = request.POST['mes']
         año_input = request.POST['año']
