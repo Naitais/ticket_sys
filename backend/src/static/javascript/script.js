@@ -10,9 +10,9 @@ var cancelar_nuevo_ticket_btn = document.getElementById("cancelar_nuevo_ticket_b
 var row_modificar_btn = document.getElementsByClassName("row_modificar_btn");
 var row_eliminar_btn = document.getElementsByClassName("row_eliminar_btn");
 var cerrar_sesion_btn = document.getElementById("cerrar_sesion_btn");
-crear_cuenta_btn = document.getElementById("crear_cuenta_btn");
-aceptar_nuevo_usuario_btn = document.getElementById("aceptar_nuevo_usuario_btn");
-cancelar_nuevo_usuario_btn = document.getElementById("cancelar_nuevo_usuario_btn");
+var crear_cuenta_btn = document.getElementById("crear_cuenta_btn");
+var aceptar_nuevo_usuario_btn = document.getElementById("aceptar_nuevo_usuario_btn");
+var cancelar_nuevo_usuario_btn = document.getElementById("cancelar_nuevo_usuario_btn");
 
 // ticket row es una coleccion de elementos asi que hay que loopearlos
 var ticket_rows = document.getElementsByClassName("ticket_row");
@@ -33,6 +33,7 @@ if (usuario_logueado.slice(9) == "enzofuentes" || usuario_logueado.slice(9) == "
     crear_cuenta_btn.style.display = "none";
 }
 
+
 // funcion para cerrar sesion
 cerrar_sesion_btn.onclick = function(){
     usuario_logueado = null
@@ -44,19 +45,19 @@ historico_tickets_btn.onclick = function(){
     window.location.href = '/api/historico-tickets/';
 }
 
-for (var i = 0; i < ticket_rows.length; i++) {
-    ticket_rows[i].addEventListener("mouseout", function(event) {
+//for (var i = 0; i < ticket_rows.length; i++) {
+//    ticket_rows[i].addEventListener("mouseout", function(event) {
         // afecto al parent del target
-        pintar_tickets_segun_estado()
-    });
-}
+//        pintar_tickets_segun_estado()
+//    });
+//}
 
-for (var i = 0; i < ticket_rows.length; i++) {
-    ticket_rows[i].addEventListener("mouseover", function(event) {
+//for (var i = 0; i < ticket_rows.length; i++) {
+//    ticket_rows[i].addEventListener("mouseover", function(event) {
         // afecto al parent del target
-        event.target.parentElement.style.backgroundColor = "white"; 
-    });
-}
+//        event.target.parentElement.style.backgroundColor = "white"; 
+//    });
+//}
 
 function pintar_tickets_segun_estado(){
     // ticket row es una coleccion de elementos asi que hay que loopearlos
@@ -77,8 +78,6 @@ function pintar_tickets_segun_estado(){
         }
     }
 }
-
-
 
 //muestro al hacer click
 nuevo_ticket_btn.onclick = function() {
@@ -200,7 +199,7 @@ aceptar_cambios_btn.onclick = function(e) {
             location.reload()
             
         },
-        error: function(xhr, status, error) {
+        error: function(error) {
             //mensaje de error
             console.error("Ocurrio un error al modificar el ticket.", error);
             alert("Ocurrio un error al modificar el ticket.")
@@ -221,16 +220,23 @@ cancelar_eliminar_ticket_btn.onclick = function() {
 
 for (var i = 0; i < row_eliminar_btn.length; i++) {
     row_eliminar_btn[i].addEventListener("click", function(event) {
-    eliminar_ticket_pantalla.style.display = "block";
+        if (usuario_logueado.slice(9) == "enzofuentes" || usuario_logueado.slice(9) == "jorge" ) {
+            
+
+            eliminar_ticket_pantalla.style.display = "block";
       
-    //obtengo los nodos de columna de la row seleccionada
-    var columnas = event.target.parentNode.parentNode.getElementsByTagName("td")
-    //console.log(columnas)
-    llenarCampoPlaceholderForm(columnas)
-    ticket_id = event.target.parentNode.parentNode.getElementsByTagName("td")[0].textContent
-    ticket_id = parseInt(ticket_id)
+            //obtengo los nodos de columna de la row seleccionada
+            var columnas = event.target.parentNode.parentNode.getElementsByTagName("td")
+            //console.log(columnas)
+            llenarCampoPlaceholderForm(columnas)
+            ticket_id = event.target.parentNode.parentNode.getElementsByTagName("td")[0].textContent
+            ticket_id = parseInt(ticket_id)
+        }
+    
   });
 }
+
+
 
 aceptar_eliminar_ticket_btn.onclick = function(e) {
     var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
@@ -250,7 +256,7 @@ aceptar_eliminar_ticket_btn.onclick = function(e) {
             location.reload()
             
         },
-        error: function(xhr, status, error) {
+        error: function(error) {
             //mensaje de error
             console.error("Ocurrio un error al modificar el ticket.", error);
             alert("Ocurrio un error al modificar el ticket.")
@@ -282,7 +288,7 @@ aceptar_nuevo_usuario_btn.onclick = function(e) {
            location.reload()
            
        },
-       error: function(xhr, status, error) {
+       error: function(error) {
            //mensaje de error
            console.error("Ocurrio un error al crear el usuario.", error);
            alert("Ocurrio un error al crear el usuario.")

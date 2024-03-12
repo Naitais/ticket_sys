@@ -51,8 +51,8 @@
                         <td>{{ ticket.nombre }}</td>
                         <td>{{ ticket.observaciones }}</td>
                         <td>{{ ticket.estado_liquidaciones }}</td>
-                        <td class="row_modificar_btn"><button>Modificar</button></td>
-                        <td class="row_eliminar_btn"><button>Eliminar</button></td>
+                        <td class="row_modificar_btn" id="modifica_btn" ><button>Modificar</button></td>
+                        <td class="row_eliminar_btn" id="elimina_btn"><button>Eliminar</button></td>
                     </tr>
                 </div>
             {% endfor %}
@@ -107,7 +107,7 @@
 
 <div id="modificar_ticket_pantalla" class="ventana_emergente">
     <div class="contenedor_ventana">
-        <h3 class="titulo_pantalla_emergente">MODIFICAR TICKET PANTALLA</h3>
+        <h3 class="titulo_pantalla_emergente">MODIFICAR TICKET</h3>
         <form id="ticket_informacion" class="contenedor_columna">
             {% csrf_token %}
 

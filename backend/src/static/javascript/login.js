@@ -1,9 +1,4 @@
 iniciar_sesion_btn = document.getElementById("iniciar_sesion_btn");
-
-
-
-
-
 iniciar_sesion_btn.onclick = function(e) {
    //armo los datos del post request obteniendo la info que cargo en cada id del form que cree en el index de html
       var data = {

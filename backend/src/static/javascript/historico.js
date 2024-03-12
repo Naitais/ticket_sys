@@ -28,7 +28,7 @@ filtrar_tickets_btn.onclick = function(){
         type: 'POST',
         url: '/api/historico-tickets/',
         data: data,
-        error: function(xhr, status, error) {
+        error: function(error) {
             //mensaje de error
             console.error("Ocurrio un error al modificar el ticket.", error);
             alert("Ocurrio un error al modificar el ticket.")

@@ -62,10 +62,8 @@ body{
     display: flex;
     flex-direction: row;
     align-items: center;
-
 }
 
 #iniciar_sesion_pantalla {
     width: fit-content;
 }
-
