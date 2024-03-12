@@ -148,6 +148,18 @@ function llenarCampoPlaceholderForm(columnas){
     }
 }
 
+function capitalizar_string(string) {
+    var primera_letra_mayuscula = string.charAt(0).toUpperCase()
+    var string_resto = string.slice(1).toLowerCase()
+
+    var string_capitalizado = primera_letra_mayuscula + string_resto
+
+    // le saco espacios en caso de haberlos
+    string_capitalizado = string_capitalizado.replace(/\s+/g, '');
+
+    return string_capitalizado
+}
+
 aceptar_cambios_btn.onclick = function(e) {
     //armo los datos del post request obteniendo la info que cargo en cada id del form que cree en el index de html
     var data = {
@@ -156,10 +168,11 @@ aceptar_cambios_btn.onclick = function(e) {
         legajo: $("#legajo_modificar").val(),
         nombre: $("#nombre_modificar").val(),
         observaciones: $("#observaciones_modificar").val(),
-        estado_liquidaciones: $("#estado_liquidaciones_modificar").val(),
+        estado_liquidaciones: capitalizar_string($("#estado_liquidaciones_modificar").val()),
         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
     };
-
+    //toUpperCase()
+    alert(capitalizar_string($("#estado_liquidaciones_modificar").val()))
     // ajax modificacion de ticket
     $.ajax({
         type: 'POST',
@@ -233,23 +246,5 @@ aceptar_eliminar_ticket_btn.onclick = function(e) {
         }
     });
 };
-
-var dropdown_test_span = document.getElementById("dropdown_test_span");
-var drop_down_container = document.getElementsByClassName("drop_down_container")
-
-dropdown_test_span.addEventListener("mouseover", function(event) {
-    // afecto al parent del target
-    //event.target.parentElement.style.backgroundColor = "white";
-    //alert(drop_down_container[0])
-    drop_down_container[0].style.display="block";
-});
-
-drop_down_container[0].addEventListener("mouseover", function(event) {
-    // afecto al parent del target
-    //event.target.parentElement.style.backgroundColor = "white";
-    //alert(drop_down_container[0])
-    //drop_down_container[0].style.display="none";
-});
-
 
 pintar_tickets_segun_estado()
