@@ -10,15 +10,15 @@
 </head>
 <body>
 <h1 class="titulo_pantalla_emergente">SISTEMA DE TICKETS</h1>
-<div id="iniciar_sesion_pantalla">
-    <div class="contenedor_ventana">
+<div>
+    <div id="iniciar_sesion_pantalla" class="contenedor_ventana">
         
         <h3 class="titulo_pantalla_emergente">INICIAR SESION</h3>
         <form>
             {% csrf_token %}
             <div class="contenedor_columna">
                 <div><input class="input_form" type="text" id="usuario_login" name="Usuario" placeholder="Usuario"></div>
-                <div><input class="input_form" type="text" id="contraseña_login" name="Empresa" placeholder="Contraseña"></div>                
+                <div><input class="input_form" type="password" id="contraseña_login" name="Empresa" placeholder="Contraseña"></div>                
             </div>
         </form>
         <div>
@@ -42,7 +42,7 @@
 
             <div class="contenedor_fila">
                 <span>Contraseña</span>
-                <input type="text" id="contraseña_nuevo" name="Contraseña" placeholder="contraseña">
+                <input type="password" id="contraseña_nuevo" name="Contraseña" placeholder="contraseña">
             </div>
 
             <div class="contenedor_fila">

@@ -50,7 +50,6 @@ body{
     align-items: center;
     background-color: rgb(96, 182, 20);
     border-radius: 5px;
-    
 }
 
 .contenedor_columna{
@@ -66,3 +65,6 @@ body{
 
 }
 
+#iniciar_sesion_pantalla {
+    width: fit-content;
+}
