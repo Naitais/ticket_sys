@@ -7,25 +7,31 @@ username = getpass.getuser()
 
 class Ticket(models.Model):
     id_ticket = models.AutoField(primary_key=True)
-    fecha_liquidaciones = models.TextField(default = datetime.date.today) #deberia ser fecha
-    usuario = models.CharField(max_length=100)
-    concepto = models.CharField(max_length=100) #deberia ser un entero
+    fecha_creacion = models.DateField(default=datetime.date.today)
+    usuario = models.CharField(max_length=100, default = username)
+    concepto = models.IntegerField(default= 0)
     empresa = models.CharField(max_length=100)
-    legajo = models.CharField(max_length=50) #deberia ser un entero
-    nombre = models.CharField(max_length=100)
+    agente_legajo = models.IntegerField(default= 0000000000)
+    agente_nombre = models.CharField(max_length=100)
     observaciones = models.TextField(default = ' ')
-    estado_liquidaciones = models.CharField(max_length=50, default = 'Pendiente')
-    #operador_sistemas = models.CharField(max_length=100, default = ' ')
-    #estado_sistemas = models.CharField(max_length=50, default = ' ')
-    #devoluciones = models.TextField(default = ' ')
-    #fecha_sistemas = models.TextField(default = ' ')
+    estado_ticket = models.CharField(max_length=50, default = 'Pendiente')
+    devoluciones = models.TextField(default = ' ')
 
-class Usuario(models.Model):
+#ANALIZAR COMO LO VOY A CREAR PORQUE TIENE QUE SER UNA COPIA DE TICKET
+#class TicketHistorico(models.Model):
+#    id_ticket = models.AutoField(primary_key=True)
+#    fecha_creacion = models.DateTimeField("fecha de ticket")
+#    fecha_creacion = models.DateTimeField("fecha de ticket")
+#    usuario = models.CharField(max_length=100, default = username)
+#    concepto = models.IntegerField()
+#    empresa = models.CharField(max_length=100)
+#    legajo = models.CharField(max_length=50) #deberia ser un entero
+#    nombre = models.CharField(max_length=100)
+#    observaciones = models.TextField(default = ' ')
+#    estado_ticket = models.CharField(max_length=50, default = 'Pendiente')
+#    devoluciones = models.TextField(default = ' ')
+
+class UsuarioSistemas(models.Model):
     id_usuario = models.AutoField(primary_key=True)
     usuario = models.CharField(max_length = 50)
-    contraseña = models.CharField(max_length = 50)
-    email = models.CharField(max_length = 50)
-    #es_soporte = models.IntegerField
-    #usuario_logueado = models.IntegerField
-
 
