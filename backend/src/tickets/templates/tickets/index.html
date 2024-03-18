@@ -30,10 +30,11 @@
                 <th>USUARIO</th>
                 <th>CONCEPTO</th>
                 <th>EMPRESA</th>
-                <th>LEGAJO</th>
+                <th>LEGAJO AGENTE</th>
                 <th>NOMBRE AGENTE</th>
                 <th>OBSERVACIONES</th>
                 <th>ESTADO TICKET</th>
+                <th>DEVOLUCION</th>
             </tr>
         </thead>
         </div>
@@ -43,14 +44,15 @@
                 <div >
                     <tr class="ticket_row">
                         <td>{{ ticket.id_ticket }}</td>
-                        <td>{{ ticket.fecha_liquidaciones }}</td>
+                        <td>{{ ticket.fecha_creacion }}</td>
                         <td>{{ ticket.usuario }}</td>
                         <td>{{ ticket.concepto }}</td>
                         <td>{{ ticket.empresa }}</td>
-                        <td>{{ ticket.legajo }}</td>
-                        <td>{{ ticket.nombre }}</td>
+                        <td>{{ ticket.agente_legajo }}</td>
+                        <td>{{ ticket.agente_nombre }}</td>
                         <td>{{ ticket.observaciones }}</td>
-                        <td>{{ ticket.estado_liquidaciones }}</td>
+                        <td>{{ ticket.estado_ticket }}</td>
+                        <td>{{ ticket.devoluciones }}</td>
                         <td class="row_modificar_btn" id="modifica_btn" ><button>Modificar</button></td>
                         <td class="row_eliminar_btn" id="elimina_btn"><button>Eliminar</button></td>
                     </tr>
