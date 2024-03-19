@@ -20,10 +20,19 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework import generics
 
 class TicketList(generics.ListCreateAPIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'tickets/index.html'
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
 
+    def get(self, request):
+        queryset = Ticket.objects.all()
+        return Response({'tickets': queryset})
+
+    
+    
 class TicketDetalle(generics.RetrieveUpdateDestroyAPIView):
+    
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
 
